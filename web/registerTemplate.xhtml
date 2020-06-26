@@ -1,0 +1,75 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templates/generalTemplate_NS.xhtml">
+            
+            <ui:define name="left">
+                left
+               
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="top" class="top">
+                    <h1>
+                        #{lang['temp.session.su']}
+                    </h1>
+                        
+                    <h:form>
+                        <h:messages globalOnly="true" />
+                        <h:panelGrid columns="2" cellpadding="5" >
+                            <h:outputLabel value="#{lang['form.fill.user']}: "/>
+                            <h:inputText value="#{registerBean.usuario.user}"
+                                         required='true'
+                                         requiredMessage="#{lang['required.err']}"/>
+                            <h:outputLabel value="#{lang['form.fill.mail']}: " />
+                            <h:inputText value="#{registerBean.usuario.correo}"
+                                         required='true'
+                                         requiredMessage="#{lang['required.err']}"
+                                         validatorMessage="#{lang['val.err.mail']}">
+                                <f:validateRegex pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+                            </h:inputText>
+                            <h:outputLabel value="#{lang['form.fill.pass']}: " />
+                            <h:inputSecret id="password" value="#{registerBean.usuario.password}"
+                                           required='true'
+                                           requiredMessage="#{lang['required.err']}"
+                                           validatorMessage="#{lang['val.err.pass']}">
+                                <f:validateLength minimum="6"/>
+                            </h:inputSecret>
+                            <h:outputLabel value="#{lang['form.fill.cpass']}: " />
+                            <h:inputSecret id="password_confirm" value="#{registerBean.confPassword}"
+                                           required='true'
+                                           validator="#{registerBean.validatePass}"
+                                           requiredMessage="#{lang['required.err']}"
+                                           validatorMessage="#{lang['val.err.pass']}">
+                                <f:validateLength minimum="6"/>
+                                
+                            </h:inputSecret>
+                            
+                            <h:outputLabel value="#{lang['form.fill.gend']}: " />
+                            <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                    <h:selectOneRadio layout="pageDirection" value="#{registerBean.usuario.genero}" 
+                                                      required="true" requiredMessage="#{lang['required.err']}">
+                                        <f:selectItem itemValue="F" itemLabel="F"/>
+                                        <f:selectItem itemValue="M" itemLabel="M"/>
+                                        <f:selectItem itemValue="O" itemLabel="#{lang['form.fill.gend.other']}"/>
+                                    </h:selectOneRadio> 
+                                </h:panelGrid>
+                            </h:panelGroup>
+                        </h:panelGrid>
+                        <h:commandButton value="#{lang['form.login.regm']}"
+                                         action="#{registerBean.registrar()}"/>
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

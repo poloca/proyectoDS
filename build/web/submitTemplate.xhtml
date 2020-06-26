@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templates/worksTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <div id="top" class="top" style=" padding-left: 50px" >
+                        <h1>#{lang['recipe.top']}</h1>
+                        <div>
+                            <h2>#{lang['recipe.seccion.info']}</h2>
+                            <h:panelGrid columns="2">
+                                <h:panelGroup>
+                                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                                        <h:outputLabel value="#{lang['form.fill.name']}: "/>
+                                        <h:inputText value="#{submitBean.receta.titulo}"
+                                                     required="true"/>
+                                        <h:outputLabel value="#{lang['recipe.info.cat']}: "/>
+                                        <h:inputText value="#{submitBean.receta.categoria}"
+                                                     required="true"/>
+                                        <h:outputLabel value="#{lang['recipe.info.prept']}: "/>
+                                        <h:inputText value="#{submitBean.receta.tprep}"
+                                                     required="true"/>
+                                        <h:outputLabel value="#{lang['recipe.info.cookt']}: "/>
+                                        <h:inputText value="#{submitBean.receta.tcook}"
+                                                     required="true"/>
+                                        <h:outputLabel value="#{lang['recipe.info.portions']}: "/>
+                                        <h:inputText value="#{submitBean.receta.porcion}"
+                                                     required="true"/>
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                                <h:panelGroup>
+                                    <h3 style=" padding-left: 150px">#{lang['recipe.info.dif']}</h3>
+                                    <h:panelGrid style=" padding-left: 150px">
+                                        <h:selectOneRadio layout="pageDirection" value="#{submitBean.receta.dificultad}" 
+                                                          required="true" requiredMessage="Campo Requerido">
+                                            <f:selectItem itemValue="Alta" itemLabel="#{lang['recipe.info.dif.high']}"/>
+                                            <f:selectItem itemValue="Media" itemLabel="#{lang['recipe.info.dif.med']}"/>
+                                            <f:selectItem itemValue="Baja" itemLabel="#{lang['recipe.info.dig.low']}"/>
+                                        </h:selectOneRadio> 
+                                    </h:panelGrid>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </div>
+                        <div>
+                            <h2>#{lang['recipe.seccion.ingr']}</h2>
+                            
+                               <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                                   <h:outputLabel value="#{lang['recipe.ingr.ing']}: "/>
+                                   <h:outputLabel value="#{lang['recipe.ingr.mes']}: "/>
+                                   <h:panelGroup>
+                                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                                            <h:inputText value="#{submitBean.receta.ingrediente}"
+                                                 required="true"/>
+                                            <h:link value="add"/>
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+                                   <h:panelGroup>
+                                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                                            <h:inputText value="med1"/>
+                                            <h:inputText value="med"/>
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+                                </h:panelGrid> 
+                            
+                        </div>
+                        <div>
+                            <h2>#{lang['recipe.seccion.prep']}</h2>
+                            <h:inputTextarea value="#{submitBean.receta.preparacion}"
+                                             style="height: 170px; width: 90%"
+                                             required="true"/>
+                        </div>
+                        <div style="padding-top: 20px">
+                            <h:commandButton value="#{lang['recipe.button.pub']}"
+                                             action="#{submitBean.publicar()}"/>
+                            <h:button value="#{lang['recipe.button.back']}" style="padding-left: 10px"
+                                      outcome="profileTemplate"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

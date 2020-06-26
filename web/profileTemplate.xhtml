@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./templates/generalTemplate_IS.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="top" class="top">
+                    <div>
+                        <h1>
+                            <h:outputText value="#{registerBean.usuario.user}"/>
+                            <h:outputText value="#{loginBack.usuario}"/>
+                        </h1>
+                        <h2>
+                            <h:button style="float: left" value="#{lang['profile.config']}"/>
+                            <h:button style="float: right" value="#{lang['profile.new']}" outcome="submitTemplate"/>
+                        </h2>
+                    </div>
+                    <div style="padding-top: 40px">
+                    <h:panelGrid columns="2" cellpadding="5" cellspacing="10">
+                        <h:panelGroup style="padding-left: 50px">
+                            <h:panelGrid>
+                                <h:outputText value="#{lang['profile.col']} ( 0 )"/>
+                                <h:outputText value="Correo: #{registerBean.usuario.correo}"/>
+                                <h:outputText value="Contraseña: #{registerBean.usuario.password}"/>
+                                <h:outputText value="Conf Contraseña: #{registerBean.confPassword}"/>
+                                <h:outputText value="Genero: #{registerBean.usuario.genero}"/>
+                            </h:panelGrid>
+                        </h:panelGroup>
+                        <h:panelGroup style="padding-left: 70px">
+                            <h1>
+                                #{lang['temp.gen.latest']}
+                            </h1>
+                            <div style="padding-top: 10px">
+                                
+                            </div>
+                            
+                        </h:panelGroup>
+                    </h:panelGrid>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

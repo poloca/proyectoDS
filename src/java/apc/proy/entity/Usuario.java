@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
     , @NamedQuery(name = "Usuario.findByUsern", query = "SELECT u FROM Usuario u WHERE u.usern = :usern")
     , @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo")
-    , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")})
+    , @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password")
+    , @NamedQuery(name = "Usuario.findByGenero", query = "SELECT u FROM Usuario u WHERE u.genero = :genero")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,6 +60,10 @@ public class Usuario implements Serializable {
     @Size(min = 1, max = 255)
     @Column(name = "password")
     private String password;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "genero")
+    private Character genero;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
     private List<Colecciones> coleccionesList;
 
@@ -69,11 +74,12 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public Usuario(Integer idUsuario, String usern, String correo, String password) {
+    public Usuario(Integer idUsuario, String usern, String correo, String password, Character genero) {
         this.idUsuario = idUsuario;
         this.usern = usern;
         this.correo = correo;
         this.password = password;
+        this.genero = genero;
     }
 
     public Integer getIdUsuario() {
@@ -106,6 +112,14 @@ public class Usuario implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Character getGenero() {
+        return genero;
+    }
+
+    public void setGenero(Character genero) {
+        this.genero = genero;
     }
 
     @XmlTransient

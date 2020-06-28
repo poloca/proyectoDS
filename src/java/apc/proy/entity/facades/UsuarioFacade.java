@@ -29,4 +29,16 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         super(Usuario.class);
     }
     
+    /**
+     * Busca en la tabla si existe un usuario con el mismo nombre
+     * @param usern
+     * @return 
+     */
+    @Override
+    public Usuario findUsuario(String usern){
+        return (Usuario) em.createQuery("select object(u) from Usuario u " + "where u.usern = :usern")
+                .setParameter("usern", usern.toUpperCase())
+                .getSingleResult();
+    }
+    
 }

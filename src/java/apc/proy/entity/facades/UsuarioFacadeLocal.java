@@ -23,11 +23,13 @@ public interface UsuarioFacadeLocal {
     void remove(Usuario usuario);
 
     Usuario find(Object id);
-
+    
     List<Usuario> findAll();
 
     List<Usuario> findRange(int[] range);
 
     int count();
+
+    public Usuario findUsuario(String usern);
     
 }

@@ -3,16 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fi.disenio.backing;
+package apc.proy.backing;
 
+import apc.proy.entity.Usuario;
+import apc.proy.entity.facades.UsuarioFacadeLocal;
+import apc.proy.session.SessionUtils;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-
-
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -20,29 +22,59 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "loginBack")
 @SessionScoped //se cambio en lugar de ViewScoped (temporalmente- despues cambiar)
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
+
+    @EJB
+    private UsuarioFacadeLocal usuarioFacade;
+
     private String Usuario;
     private String Password;
-    
-    private static final String MAIL_DUMMY= "a";
-    private static final String PWD_DUMMY= "a";
-    
-    
-    public String validarLogin(){
-        if(Usuario.equals(MAIL_DUMMY) && Password.equals(PWD_DUMMY)){
-            return "profileTemplate";
+    private int x;
+
+    public String validarLogin() {
+        Usuario u = usuarioFacade.findUsuario(Usuario);
+
+        if (u != null) {
+            String p = u.getPassword();
+            String user= u.getUsern();
+            String id= (String) u.getIdUsuario().toString();
+            
+            if (p.equals(Password)) {
+                HttpSession session = SessionUtils.getSession();
+		session.setAttribute("username", user);
+                session.setAttribute("userid", id);
+               
+                return "profileTemplate";
+
+            } else {
+
+                FacesContext fctx = FacesContext.getCurrentInstance();
+                FacesMessage msg = new FacesMessage("#{lang['val.log.err']}");
+                fctx.addMessage(null, msg);
+
+                return null;
+            }
         }
-        FacesContext fctx= FacesContext.getCurrentInstance();
-        FacesMessage msg= new FacesMessage("Datos de acceso incorrecto");
-        
-        fctx.addMessage(null, msg);
+
+        FacesContext fctx2 = FacesContext.getCurrentInstance();
+        FacesMessage msg2 = new FacesMessage("#{lang['val.log.noex']}");
+        fctx2.addMessage(null, msg2);
+
         return null;
     }
+    
+    public String logout() {
+        HttpSession session = SessionUtils.getSession();
+        session.invalidate();
+        
+        return "index";
+    }
+
     /**
      * Creates a new instance of LoginBean
      */
     public LoginBean() {
-        
+
     }
 
     public String getUsuario() {
@@ -60,5 +92,5 @@ public class LoginBean implements Serializable{
     public void setPassword(String Password) {
         this.Password = Password;
     }
-    
+
 }

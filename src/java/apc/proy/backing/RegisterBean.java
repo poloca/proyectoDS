@@ -7,16 +7,17 @@ package apc.proy.backing;
 
 import apc.proy.entity.Usuario;
 import apc.proy.entity.facades.UsuarioFacadeLocal;
+import apc.proy.session.SessionUtils;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIInput;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped //se cambio en lugar de ViewScoped (temporalmente- despues cambiar)
@@ -24,11 +25,10 @@ public class RegisterBean {
 
     @EJB
     private UsuarioFacadeLocal usuarioFacade;
- 
-    
+
     private String confPassword;
     private Usuario usuario;
-
+    
     public RegisterBean() {
     }
 
@@ -39,6 +39,14 @@ public class RegisterBean {
 
     public String registrar() {
         usuarioFacade.create(usuario);
+        
+        String user= usuario.getUsern();
+        String id= (String) usuario.getIdUsuario().toString();
+    
+        HttpSession session = SessionUtils.getSession();
+		session.setAttribute("username", user);
+                session.setAttribute("userid", id);
+                
         return "profileTemplate";
     }
 
@@ -71,5 +79,32 @@ public class RegisterBean {
         }
     }
 
-   
+    public void validateUser(FacesContext context, UIComponent component, Object value) {
+
+        String usern = (String) value;
+        
+        Usuario usr = usuarioFacade.findUsuario(usern);
+        
+        if (usr != null) {
+            String message = context.getApplication().evaluateExpressionGet(context, "#{lang['val.err.usur']}", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+    }
+    
+    public void validateMail(FacesContext context, UIComponent component, Object value) {
+
+        String correo = (String) value;
+        
+        Usuario mlr = usuarioFacade.findMailRep(correo);
+        
+        if (mlr != null) {
+            String message = context.getApplication().evaluateExpressionGet(context, "#{lang['val.err.mail']}", String.class);
+            FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, message);
+            throw new ValidatorException(msg);
+        }
+    }
+  
+    
+    
 }

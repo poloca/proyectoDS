@@ -64,8 +64,7 @@ public class Usuario implements Serializable {
     @NotNull
     @Column(name = "genero")
     private Character genero;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
-    private List<Colecciones> coleccionesList;
+    
 
     public Usuario() {
     }
@@ -120,15 +119,6 @@ public class Usuario implements Serializable {
 
     public void setGenero(Character genero) {
         this.genero = genero;
-    }
-
-    @XmlTransient
-    public List<Colecciones> getColeccionesList() {
-        return coleccionesList;
-    }
-
-    public void setColeccionesList(List<Colecciones> coleccionesList) {
-        this.coleccionesList = coleccionesList;
     }
 
     @Override

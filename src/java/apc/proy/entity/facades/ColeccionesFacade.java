@@ -6,6 +6,7 @@
 package apc.proy.entity.facades;
 
 import apc.proy.entity.Colecciones;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,5 +29,6 @@ public class ColeccionesFacade extends AbstractFacade<Colecciones> implements Co
     public ColeccionesFacade() {
         super(Colecciones.class);
     }
+    
     
 }

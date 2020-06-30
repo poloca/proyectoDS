@@ -9,6 +9,7 @@ import apc.proy.entity.Usuario;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -28,17 +29,39 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
     public UsuarioFacade() {
         super(Usuario.class);
     }
-    
-    /**
-     * Busca en la tabla si existe un usuario con el mismo nombre
-     * @param usern
-     * @return 
-     */
+
     @Override
-    public Usuario findUsuario(String usern){
-        return (Usuario) em.createQuery("select object(u) from Usuario u " + "where u.usern = :usern")
-                .setParameter("usern", usern.toUpperCase())
-                .getSingleResult();
+    public Usuario findUsuario(String usern) {
+
+        Usuario Nombre;
+
+        try {
+            Nombre = (Usuario) em.createQuery("SELECT u FROM Usuario u WHERE u.usern = :usern")
+                    .setParameter("usern", usern)
+                    .getSingleResult();
+
+            return Nombre;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Usuario findMailRep(String correo) {
+
+        Usuario Mail;
+
+        try {
+            Mail = (Usuario) em.createQuery("SELECT u FROM Usuario u WHERE u.correo = :correo")
+                    .setParameter("correo", correo)
+                    .getSingleResult();
+
+            return Mail;
+
+        } catch (Exception e) {
+            return null;
+        }
     }
     
 }

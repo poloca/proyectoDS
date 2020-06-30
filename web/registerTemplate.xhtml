@@ -22,18 +22,23 @@
 
                     <h:form>
                         <h:messages globalOnly="true" />
-                        <h:panelGrid columns="2" cellpadding="5" >
+                        <h:panelGrid columns="3" cellpadding="5" >
                             <h:outputLabel value="#{lang['form.fill.user']}: "/>
-                            <h:inputText value="#{registerBean.usuario.usern}"
+                            <h:inputText id="usuario" value="#{registerBean.usuario.usern}"
                                          required='true'
+                                         validator="#{registerBean.validateUser}"
+                                         validatorMessage="#{lang['val.err.usur']}"
                                          requiredMessage="#{lang['required.err']}"/>
+                                <h:message for = "usuario" />
                                 <h:outputLabel value="#{lang['form.fill.mail']}: " />
-                                <h:inputText value="#{registerBean.usuario.correo}"
+                                <h:inputText id="correo" value="#{registerBean.usuario.correo}"
                                              required='true'
+                                             validator="#{registerBean.validateMail}"
                                              requiredMessage="#{lang['required.err']}"
                                              validatorMessage="#{lang['val.err.mail']}">
                                     <f:validateRegex pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
                                 </h:inputText>
+                                <h:message for = "correo" />
                                 <h:outputLabel value="#{lang['form.fill.pass']}: " />
                                 <h:inputSecret id="password" value="#{registerBean.usuario.password}"
                                                required='true'
@@ -41,6 +46,7 @@
                                                validatorMessage="#{lang['val.err.pass']}">
                                     <f:validateLength minimum="6"/>
                                 </h:inputSecret>
+                                <h:message for = "password" />
                                 <h:outputLabel value="#{lang['form.fill.cpass']}: " />
                                 <h:inputSecret id="password_confirm" value="#{registerBean.confPassword}"
                                                required='true'
@@ -48,9 +54,9 @@
                                                requiredMessage="#{lang['required.err']}"
                                                validatorMessage="#{lang['val.err.pass']}">
                                     <f:validateLength minimum="6"/>
-
                                 </h:inputSecret>
-                                <h:outputLabel value="#{lang['form.fill.gend']}: " />
+                                <h:message for = "password_confirm" />
+                                <h:outputLabel id="gen" value="#{lang['form.fill.gend']}: " />
                                 <h:panelGroup>
                                     <h:panelGrid columns="2">
                                         <h:selectOneRadio layout="pageDirection" value="#{registerBean.usuario.genero}" 
@@ -61,6 +67,7 @@
                                         </h:selectOneRadio> 
                                     </h:panelGrid>
                                 </h:panelGroup>
+                                <h:message for = "gen" />
                         </h:panelGrid>
                         <h:commandButton value="#{lang['form.login.regm']}"
                                          action="#{registerBean.registrar()}"/>

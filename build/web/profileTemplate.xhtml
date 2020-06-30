@@ -16,8 +16,7 @@
                 <div id="top" class="top">
                     <div>
                         <h1>
-                            <h:outputText value="#{registerBean.usuario.usern}"/>
-                            <h:outputText value="#{loginBack.usuario}"/>
+                            <h:outputText value="#{sessionBean.user} id# #{sessionBean.userid}"/>
                         </h1>
                         <h2>
                             <h:button style="float: left" value="#{lang['profile.config']}"/>
@@ -28,7 +27,7 @@
                     <h:panelGrid columns="2" cellpadding="5" cellspacing="10">
                         <h:panelGroup style="padding-left: 50px">
                             <h:panelGrid>
-                                <h:outputText value="#{lang['profile.col']} ( 0 )"/>
+                                <h:link value="#{lang['profile.col']} (0)" outcome="collectionTemplate"/>
                                 <h:outputText value="Correo: #{registerBean.usuario.correo}"/>
                                 <h:outputText value="Contraseña: #{registerBean.usuario.password}"/>
                                 <h:outputText value="Conf Contraseña: #{registerBean.confPassword}"/>

@@ -37,7 +37,9 @@
                         </h:panelGroup>
                         <h:panelGroup>
                             <h:panelGrid>
-                                <h:link value="#{lang['temp.session.lo']}" outcome="index"/>
+                                <h:form>
+                                    <h:commandLink action="#{loginBack.logout}" value="#{lang['temp.session.lo']}"/>
+                                </h:form>
                             </h:panelGrid>
                         </h:panelGroup>
                     </h:panelGrid>

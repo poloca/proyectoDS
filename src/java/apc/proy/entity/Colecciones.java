@@ -12,8 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -31,6 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Colecciones.findAll", query = "SELECT c FROM Colecciones c")
     , @NamedQuery(name = "Colecciones.findByIdColeccion", query = "SELECT c FROM Colecciones c WHERE c.idColeccion = :idColeccion")
+    , @NamedQuery(name = "Colecciones.findByIdUsuario", query = "SELECT c FROM Colecciones c WHERE c.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Colecciones.findByNombrecol", query = "SELECT c FROM Colecciones c WHERE c.nombrecol = :nombrecol")
     , @NamedQuery(name = "Colecciones.findByDescripcion", query = "SELECT c FROM Colecciones c WHERE c.descripcion = :descripcion")})
 public class Colecciones implements Serializable {
 
@@ -42,12 +42,18 @@ public class Colecciones implements Serializable {
     private Integer idColeccion;
     @Basic(optional = false)
     @NotNull
+    @Column(name = "id_usuario")
+    private int idUsuario;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "nombrecol")
+    private String nombrecol;
+    @Basic(optional = false)
+    @NotNull
     @Size(min = 1, max = 255)
     @Column(name = "descripcion")
     private String descripcion;
-    @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario")
-    @ManyToOne(optional = false)
-    private Usuario idUsuario;
 
     public Colecciones() {
     }
@@ -56,8 +62,10 @@ public class Colecciones implements Serializable {
         this.idColeccion = idColeccion;
     }
 
-    public Colecciones(Integer idColeccion, String descripcion) {
+    public Colecciones(Integer idColeccion, int idUsuario, String nombrecol, String descripcion) {
         this.idColeccion = idColeccion;
+        this.idUsuario = idUsuario;
+        this.nombrecol = nombrecol;
         this.descripcion = descripcion;
     }
 
@@ -69,20 +77,28 @@ public class Colecciones implements Serializable {
         this.idColeccion = idColeccion;
     }
 
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public String getNombrecol() {
+        return nombrecol;
+    }
+
+    public void setNombrecol(String nombrecol) {
+        this.nombrecol = nombrecol;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    public Usuario getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Usuario idUsuario) {
-        this.idUsuario = idUsuario;
     }
 
     @Override

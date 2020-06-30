@@ -15,15 +15,17 @@
                     </h1>
                     <h:form>
                         <h:messages globalOnly="true" />
-                        <h:panelGrid columns="2" cellpadding="5">
+                        <h:panelGrid columns="3" cellpadding="5">
                             <h:outputLabel value="#{lang['form.fill.user']}: " />
-                            <h:inputText  value="#{loginBack.usuario}" 
+                            <h:inputText id="username" value="#{loginBack.usuario}" 
                                           required='true'
                                           requiredMessage="#{lang['required.err']}"/>
-                            <h:outputLabel value="#{lang['form.fill.pass']}: " />
+                            <h:message for = "username" />
+                            <h:outputLabel id="pass" value="#{lang['form.fill.pass']}: " />
                             <h:inputText value="#{loginBack.password}"
                                          required='true'
                                          requiredMessage="#{lang['required.err']}"/>
+                            <h:message for = "pass" />
                         </h:panelGrid>
                         <h:commandButton value="#{lang['temp.session.li']}" 
                                          action="#{loginBack.validarLogin()}"/>

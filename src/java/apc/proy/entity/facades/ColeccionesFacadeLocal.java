@@ -25,7 +25,7 @@ public interface ColeccionesFacadeLocal {
     Colecciones find(Object id);
 
     List<Colecciones> findAll();
-
+    
     List<Colecciones> findRange(int[] range);
 
     int count();

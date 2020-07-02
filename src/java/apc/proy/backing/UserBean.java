@@ -48,10 +48,6 @@ public class UserBean implements Serializable {
     public String actualizar() {
         userFacade.edit(founduser);
 
-        String user = founduser.getUsern();
-        
-        session.setAttribute("username", user);
-
         return "/login/profileTemplate";
     }
 

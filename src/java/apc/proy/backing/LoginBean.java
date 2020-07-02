@@ -14,6 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -29,7 +30,6 @@ public class LoginBean implements Serializable {
 
     private String Usuario;
     private String Password;
-    private int x;
 
     public String validarLogin() {
         Usuario u = usuarioFacade.findUsuario(Usuario);
@@ -49,15 +49,16 @@ public class LoginBean implements Serializable {
             } else {
 
                 FacesContext fctx = FacesContext.getCurrentInstance();
-                FacesMessage msg = new FacesMessage("#{lang['val.log.err']}");
+                FacesMessage msg = new FacesMessage("Username or Password incorrect");
                 fctx.addMessage(null, msg);
+                            
 
                 return null;
             }
         }
 
         FacesContext fctx2 = FacesContext.getCurrentInstance();
-        FacesMessage msg2 = new FacesMessage("#{lang['val.log.noex']}");
+        FacesMessage msg2 = new FacesMessage("User doesn't exists");
         fctx2.addMessage(null, msg2);
 
         return null;

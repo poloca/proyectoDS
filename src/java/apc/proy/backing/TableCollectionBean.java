@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
  */
 @ManagedBean
 @ViewScoped
-public class tableCollectionBean implements Serializable{
+public class TableCollectionBean implements Serializable{
 
     @EJB
     private ColeccionesFacadeLocal colFacade;
@@ -32,7 +32,7 @@ public class tableCollectionBean implements Serializable{
     private int ncol;
     
     
-    public tableCollectionBean() {
+    public TableCollectionBean() {
     }
 
     @PostConstruct

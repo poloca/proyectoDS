@@ -12,12 +12,28 @@
 
             <ui:define name="content">
                 <div id="top" class="top">
+                    <h:form>
                     <h:panelGrid columns="2" cellpadding="5px" cellspacing="5px">
-                        <h:outputLabel for="cat" value="Categoria:"/>
-
-
+                        <h:outputLabel for="medida" value="Medidas:"/>
+                        
+                        <p:autoComplete id="medida" value="#{ingredientesTBean.medida}" 
+                                        completeMethod="#{ingredientesTBean.compMedidas}"
+                                        converter="medidasConverter" var="medida"
+                                        itemLabel="#{medida.nombrem}"
+                                        itemValue="#{medida}"
+                                        forceSelection="true" />
+                        
                     </h:panelGrid>
-
+                    </h:form>
+                    <h:form>
+                        <p:dataTable value="#{medidasBean.medidas}" var="med">
+                            <p:column headerText="id">
+                                <h:outputText value="#{med.nombrem}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                    
+                            
                     
                 </div>
             </ui:define>

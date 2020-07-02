@@ -30,4 +30,6 @@ public interface ColeccionesFacadeLocal {
 
     int count();
     
+    public List<Colecciones> findByUN(int iduser);
+    
 }

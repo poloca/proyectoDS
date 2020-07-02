@@ -45,7 +45,7 @@ public class CollectionBean implements Serializable {
     public String registrar() {
         colFacade.create(coleccion);
         
-        return "profileTemplate";
+        return "/login/collectionViewTemplate";
     }
 
     public Colecciones getColeccion() {

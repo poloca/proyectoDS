@@ -44,7 +44,7 @@ public class LoginBean implements Serializable {
 		session.setAttribute("username", user);
                 session.setAttribute("userid", id);
                
-                return "profileTemplate";
+                return "/login/profileTemplate";
 
             } else {
 
@@ -67,7 +67,7 @@ public class LoginBean implements Serializable {
         HttpSession session = SessionUtils.getSession();
         session.invalidate();
         
-        return "index";
+        return "/faces/index";
     }
 
     /**

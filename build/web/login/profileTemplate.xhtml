@@ -6,7 +6,7 @@
 
     <body>
 
-        <ui:composition template="./templates/generalTemplate_IS.xhtml">
+        <ui:composition template="./../templates/generalTemplate_IS.xhtml">
 
             <ui:define name="left">
                 left
@@ -19,15 +19,15 @@
                             <h:outputText value="#{sessionBean.user} id# #{sessionBean.userid}"/>
                         </h1>
                         <h2>
-                            <h:button style="float: left" value="#{lang['profile.config']}"/>
+                            <h:button style="float: left" value="#{lang['profile.config']}" outcome="eUserTemplate"/>
                             <h:button style="float: right" value="#{lang['profile.new']}" outcome="submitTemplate"/>
                         </h2>
                     </div>
                     <div style="padding-top: 40px">
-                    <h:panelGrid columns="2" cellpadding="5" cellspacing="10">
+                        <h:panelGrid columns="2" cellpadding="5" cellspacing="10">
                         <h:panelGroup style="padding-left: 50px">
                             <h:panelGrid>
-                                <h:link value="#{lang['profile.col']} (0)" outcome="collectionTemplate"/>
+                                <h:link value="#{lang['profile.col']} ( #{tableCollectionBean.ncol} )" outcome="collectionViewTemplate"/>
                                 <h:outputText value="Correo: #{registerBean.usuario.correo}"/>
                                 <h:outputText value="Contraseña: #{registerBean.usuario.password}"/>
                                 <h:outputText value="Conf Contraseña: #{registerBean.confPassword}"/>

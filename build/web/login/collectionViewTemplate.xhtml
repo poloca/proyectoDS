@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/generalTemplate_IS.xhtml">
+
+            <ui:define name="left">
+                left
+            </ui:define>
+
+            <ui:define name="content">
+                <div id="top" class="top" style=" padding: 10px">
+                    <h1>
+                        #{lang['profile.col']}
+                    </h1>
+                    <div style="padding: 10px; align-content: center">
+                        <h:form id="colform">
+                        <p:dataTable value="#{tableCollectionBean.colecciones}" var="col" rowKey="#{col.idColeccion}"
+                                     selection="#{tableCollectionBean.coleccion}" selectionMode="single"
+                                     style=" width: 90%">
+                            <p:column headerText="#{lang['form.fill.name']}">
+                                <h:outputText value="#{col.nombrecol}"/>
+                            </p:column>
+                            <p:column headerText="#{lang['form.fill.desc']}">
+                                <h:outputText value="#{col.descripcion}"/>
+                            </p:column>
+                        </p:dataTable>
+                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                            <p:commandButton value="#{lang['del.button']}" update="colform" icon="pi pi-times" action="#{tableCollectionBean.deleteCol}"/>
+                            <p:button value="#{lang['add.button']}" icon="pi pi-plus" outcome="/login/collectionTemplate"/>
+                        </h:panelGrid>
+                    </h:form>
+                    </div> 
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

@@ -29,6 +29,21 @@ public class ColeccionesFacade extends AbstractFacade<Colecciones> implements Co
     public ColeccionesFacade() {
         super(Colecciones.class);
     }
-    
-    
+
+    @Override
+    public List<Colecciones> findByUN(int iduser) {
+        List<Colecciones> coleccionid;
+
+        try {
+            coleccionid = em.createQuery("SELECT c FROM Colecciones c WHERE c.idUsuario = :idUsuario")
+                    .setParameter("idUsuario", iduser).getResultList();
+
+            return coleccionid;
+            
+        } catch (Exception e) {
+            
+            return null;
+        }
+    }
+
 }

@@ -46,6 +46,22 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
             return null;
         }
     }
+    
+    @Override
+    public Usuario findUsuarioByid(int userid){
+        Usuario User;
+        
+        try {
+            User = (Usuario) em.createQuery("SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
+                    .setParameter("idUsuario", userid)
+                    .getSingleResult();
+
+            return User;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
     @Override
     public Usuario findMailRep(String correo) {

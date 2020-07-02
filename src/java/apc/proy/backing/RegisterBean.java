@@ -47,7 +47,7 @@ public class RegisterBean {
 		session.setAttribute("username", user);
                 session.setAttribute("userid", id);
                 
-        return "profileTemplate";
+        return "/login/profileTemplate";
     }
 
     public Usuario getUsuario() {

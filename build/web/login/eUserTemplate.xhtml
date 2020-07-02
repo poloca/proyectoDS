@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../templates/generalTemplate_IS.xhtml">
+
+            <ui:define name="content">
+                <div id="top" class="top">
+                    <h:form id="form">
+                        <h:panelGrid columns="3" cellpadding="5px" cellspacing="5px">
+                            <h:outputText value="id"/>
+                            <h:outputText value="#{userBean.founduser.idUsuario}"/>
+                            <h:outputText value=" "/>
+
+                            <h:outputLabel value="#{lang['form.fill.user']}"/>
+                            <h:inputText id="usuario" value="#{userBean.founduser.usern}"
+                                         required='true'
+                                         validator="#{userBean.validateUser}"
+                                         validatorMessage="#{lang['val.err.usur']}"
+                                         requiredMessage="#{lang['required.err']}"/>
+                            <h:message for = "usuario" />
+
+                            <h:outputLabel value="#{lang['form.fill.mail']}"/>
+
+                            <h:inputText id="correo" value="#{userBean.founduser.correo}" 
+                                         required="true" 
+                                         validator="#{userBean.validateMail}"
+                                         requiredMessage="#{lang['required.err']}"
+                                         validatorMessage="#{lang['val.err.mail']}">
+                                <f:validateRegex  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"/>
+                            </h:inputText>
+
+                            <h:message for="correo"/>
+
+                            <h:outputLabel value="#{lang['form.fill.pass']}"/>
+
+                            <h:inputText id="password" value="#{userBean.founduser.password}" 
+                                         required="true" 
+                                         requiredMessage="#{lang['required.err']}"
+                                         validatorMessage="#{lang['val.err.pass']}">
+                                <f:validateLength minimum="6"/>
+                            </h:inputText>
+
+                            <h:message for="password"/>
+
+                            <h:outputLabel value="#{lang['form.fill.cpass']}"/>
+                            <h:inputText id="password_confirm" value="#{userBean.confPassword}"
+                                         required="true"
+                                         validator="#{userBean.validatePass}"
+                                         requiredMessage="#{lang['required.err']}"
+                                         validatorMessage="#{lang['val.err.pass']}">
+                                <f:validateLength minimum="6"/>
+                            </h:inputText>
+                            <h:message for = "password_confirm" />
+
+                            <h:outputLabel id="gen" value="#{lang['form.fill.gend']}: " />
+                            <h:panelGroup>
+                                <h:panelGrid columns="2">
+                                    <h:selectOneRadio layout="pageDirection" value="#{userBean.founduser.genero}" 
+                                                      required="true" requiredMessage="#{lang['required.err']}">
+                                        <f:selectItem itemValue="F" itemLabel="F"/>
+                                        <f:selectItem itemValue="M" itemLabel="M"/>
+                                        <f:selectItem itemValue="O" itemLabel="#{lang['form.fill.gend.other']}"/>
+                                    </h:selectOneRadio> 
+                                </h:panelGrid>
+                            </h:panelGroup>
+                            <h:message for = "gen" />
+
+                        </h:panelGrid>
+                        <h:panelGrid columns="2" cellpadding="5px" cellspacing="5px">
+                            <h:commandButton value="#{lang['act.button']}"
+                                         action="#{userBean.actualizar}"/>
+                            <h:button value="#{lang['recipe.button.back']}" outcome="/login/profileTemplate"/>
+                        </h:panelGrid>
+                        
+                    </h:form>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

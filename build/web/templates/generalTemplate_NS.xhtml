@@ -3,12 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
         <h:outputStylesheet  library="css" name="cssLayout.css"/>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
         <title>Facelets Template</title>
     </h:head>
 
@@ -37,13 +39,6 @@
                                 </h:form>
                             </h:panelGrid>
                         </h:panelGroup>
-                        <h:panelGroup>
-                            <h:panelGrid columns="3">
-                                <h:link value="#{lang['temp.session.su']}" outcome="registerTemplate"/>
-                                <h:outputLabel value="/" />
-                                <h:link value="#{lang['temp.session.li']}" outcome="loginTemplate"/>
-                            </h:panelGrid>
-                        </h:panelGroup>
                     </h:panelGrid>
 
                 </h:panelGrid>
@@ -52,9 +47,14 @@
 
             <div>
                 <div id="left">
-                    <ui:insert name="left">Right</ui:insert>
-                    <h:graphicImage library="img" name= "ejemplo1.png" width="100%" />
-                    <h:graphicImage library="img" name= "ejemplo2.png" width="100%" />
+                    
+                        <p:menu style="width: 90%">
+                            <p:submenu label="#{lang['temp.session.pf']}" icon="pi pi-user">
+                                <p:menuitem value="#{lang['temp.session.li']}" icon="pi pi-sign-in" outcome="/public/loginTemplate"/>
+                                <p:menuitem value="#{lang['temp.session.su']}" icon="pi pi-user-plus" outcome="/public/registerTemplate"/>
+                            </p:submenu>
+                        </p:menu>
+                    
                 </div>
                 <div id="content" class="left_content">
                     <ui:insert name="content">Content</ui:insert>

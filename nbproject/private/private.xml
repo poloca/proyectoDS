@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/desa/ProyectoAbril/web/login/recetaTemplate.xhtml</file>
-            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/backing/IngredientesTBean.java</file>
-            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/backing/LoginBean.java</file>
-            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/converters/MedidasConverter.java</file>
-            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/backing/MedidasBean.java</file>
+            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/entity/Receta.java</file>
+            <file>file:/home/desa/ProyectoAbril/web/publishedTemplate.xhtml</file>
+            <file>file:/home/desa/ProyectoAbril/web/login/exploreIndexTemplate.xhtml</file>
+            <file>file:/home/desa/ProyectoAbril/web/public/searchByAllTemplate.xhtml</file>
+            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/entity/facades/RecetaFacadeLocal.java</file>
+            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/entity/facades/RecetaFacade.java</file>
+            <file>file:/home/desa/ProyectoAbril/src/java/apc/proy/backing/GetRecetasBean.java</file>
         </group>
     </open-files>
 </project-private>

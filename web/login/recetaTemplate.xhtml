@@ -20,7 +20,7 @@
                                         completeMethod="#{ingredientesTBean.compMedidas}"
                                         converter="medidasConverter" var="medida"
                                         itemLabel="#{medida.nombrem}"
-                                        itemValue="#{medida}"
+                                        itemValue="#{medida.idMedida}"
                                         forceSelection="true" />
                         
                     </h:panelGrid>
@@ -31,6 +31,15 @@
                                 <h:outputText value="#{med.nombrem}"/>
                             </p:column>
                         </p:dataTable>
+                    </h:form>
+                    
+                    <h:form>
+                        <p:dataGrid value="#{categoriasBean.categorias}" var="cat"
+                                    class="3" layout="grid" paginator="false" id="categ"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="6,12,16">
+                            <h:outputText value="#{cat.nombrec}"/>
+                        </p:dataGrid>
                     </h:form>
                     
                             

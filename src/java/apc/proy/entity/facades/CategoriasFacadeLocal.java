@@ -32,4 +32,6 @@ public interface CategoriasFacadeLocal {
     
     public List<Categorias> findAllCat();
     
+    public String findCategoriaByid(int catid);
+    
 }

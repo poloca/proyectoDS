@@ -27,7 +27,7 @@ public class SubmitBean {
     }
     
     public String publicar(){
-        return "publishedTemplate";
+        return "/faces/publishedTemplate";
     }
     
     public void listener(ActionEvent ev){

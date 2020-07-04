@@ -21,9 +21,9 @@
                 <h:graphicImage library="img" name= "bannerProy2.jpeg" width="100%"/>
 
                 <h:panelGrid columns="9" cellpadding="5" cellspacing="5" style=" padding-left: 10px">
-                    <h:link value="#{lang['temp.gen.exp']}"/>
-                    <h:link value="#{lang['temp.gen.search']}"/>
-                    <h:link value="#{lang['temp.gen.about']}"/>
+                    <h:link value="#{lang['temp.gen.exp']}" outcome="/login/exploreIndexTemplate_IS"/>
+                    <h:link value="#{lang['temp.gen.search']}" outcome="/login/searchByTemplate_IS"/>
+                    <h:link value="#{lang['temp.gen.about']}" outcome="/login/about_IS"/>
                     <h:form>
                         <h:outputLabel value="#{lang['temp.gen.search']}: " />
                         <h:inputText/> 

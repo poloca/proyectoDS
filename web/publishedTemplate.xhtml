@@ -10,13 +10,12 @@
 
             <ui:define name="content">
                 <div id="top" class="top">
-                    <h1>
-                        <h:outputText value="#{submitBean.receta.titulo}"/>
+                    <h1 style="font-size: 24px">
+                        <h:outputText value="#{getRecetasBean.receta.nombrer}"/>
                     </h1>
                     <div align="right" style="padding-right: 50px">
                         <h4>
-                            <h:outputText value="#{lang['recipe.info.pub']} #{registerBean.usuario.user}"/>
-                            <h:outputText value="#{loginBack.usuario}"/>
+                            <h:outputText value="#{lang['recipe.info.pub']} #{getRecetasBean.usern}"/>
                         </h4>            
                     </div>
                     <div style=" padding-left: 50px">
@@ -26,19 +25,19 @@
                                 <h:panelGroup>
                                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
                                         <h:outputLabel value="#{lang['recipe.info.cat']}: "/>
-                                        <h:outputText value="#{submitBean.receta.categoria}"/>
+                                        <h:outputText value="#{getRecetasBean.catn}"/>
                                         <h:outputLabel value="#{lang['recipe.info.prept']}: "/>
-                                        <h:outputText value="#{submitBean.receta.tprep}"/>
+                                        <h:outputText value="#{getRecetasBean.receta.tprep} minutes"/>
                                         <h:outputLabel value="#{lang['recipe.info.cookt']}: "/>
-                                        <h:outputText value="#{submitBean.receta.tcook}"/>
+                                        <h:outputText value="#{getRecetasBean.receta.tcook} minutes"/>
                                         <h:outputLabel value="#{lang['recipe.info.portions']}: "/>
-                                        <h:outputText value="#{submitBean.receta.porcion}"/>
+                                        <h:outputText value="#{getRecetasBean.receta.porcion} servings"/>
                                     </h:panelGrid>
                                 </h:panelGroup>
                                 <h:panelGroup>
                                     <h3 style=" padding-left: 150px">#{lang['recipe.info.dif']}</h3>
                                     <h:panelGrid style=" padding-left: 150px">
-                                        <h:outputText value="#{submitBean.receta.dificultad}"/> 
+                                        <h:outputText value="#{getRecetasBean.receta.dificultad}"/> 
                                     </h:panelGrid>
                                 </h:panelGroup>
                             </h:panelGrid>
@@ -48,26 +47,26 @@
                             <h:panelGrid columns="2" cellpadding="15" cellspacing="5">
                                 <h:panelGroup>
                                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                                        <h:outputText value="#{submitBean.receta.ingrediente}"/>
+                                        <h:outputText value="Ingrediente"/>
                                     </h:panelGrid>
                                 </h:panelGroup>
                                 <h:panelGroup>
                                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                                        <h:outputLabel value="#{submitBean.receta.ingrediente}"/>
-                                        <h:outputText value="med11"/>
+                                        <h:outputLabel value="Medida"/>
+                                        <h:outputText value="Medida nom"/>
                                     </h:panelGrid>
                                 </h:panelGroup>
                             </h:panelGrid>
                         </div>
                         <div>
                             <h2>#{lang['recipe.seccion.prep']}</h2>
-                            <h:outputText value="#{submitBean.receta.preparacion}"
+                            <h:outputText value="#{getRecetasBean.receta.preparacion}"
                                              style="height: 170px; width: 90%"/>
                             
                         </div>
                         <div style="padding-top: 20px">
                             <h:button style="float: right" value="#{lang['recipe.button.edit']}"/>
-                            <h:button value="#{lang['recipe.button.back']}" outcome="profileTemplate"/>
+                            <h:button value="#{lang['recipe.button.back']}" />
                         </div>
                     </div>
                 </div>

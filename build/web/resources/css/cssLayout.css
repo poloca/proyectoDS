@@ -46,6 +46,56 @@
     margin: 0px 170px 0px 170px;
 }
 
+.dropbtn {
+  background-color: #f3e4e1;
+  color: #ff6e7e;
+  padding: 16px;
+  font-size: 14px;
+  font-weight : bold;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #b2ebb5;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #ff6e7e;
+  padding: 12px 16px;
+  font-weight : bold;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #b2ebb5;
+}
+
+.forty-percent {
+     width: 40%;
+}
+
+.sixty-percent {
+     width: 60%;
+}
+
 #top a:link, #top a:visited {
   color: #ff6e7e;
   font-weight : bold;

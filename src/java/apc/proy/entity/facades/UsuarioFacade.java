@@ -80,4 +80,20 @@ public class UsuarioFacade extends AbstractFacade<Usuario> implements UsuarioFac
         }
     }
     
+    @Override
+    public String findUserNombreByid(int userid){
+        String userNom;
+        
+        try {
+            userNom= (String) em.createQuery("SELECT u.usern FROM Usuario u WHERE u.idUsuario = :idUsuario")
+                    .setParameter("idUsuario", userid)
+                    .getSingleResult();
+
+            return userNom;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
 }

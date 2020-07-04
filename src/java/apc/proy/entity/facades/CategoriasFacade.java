@@ -46,4 +46,20 @@ public class CategoriasFacade extends AbstractFacade<Categorias> implements Cate
         }
     }
     
+    @Override
+    public String findCategoriaByid(int catid){
+        String catNom;
+        
+        try {
+            catNom= (String) em.createQuery("SELECT c.nombrec FROM Categorias c WHERE c.idCategoria = :idCategoria")
+                    .setParameter("idCategoria", catid)
+                    .getSingleResult();
+
+            return catNom;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
 }

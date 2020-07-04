@@ -36,4 +36,6 @@ public interface UsuarioFacadeLocal {
     
     public Usuario findMailRep(String correo);
     
+    public String findUserNombreByid(int userid);
+    
 }

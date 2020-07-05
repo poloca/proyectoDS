@@ -27,11 +27,11 @@
                                         <h:outputLabel value="#{lang['recipe.info.cat']}: "/>
                                         <h:outputText value="#{getRecetasBean.catn}"/>
                                         <h:outputLabel value="#{lang['recipe.info.prept']}: "/>
-                                        <h:outputText value="#{getRecetasBean.receta.tprep} minutes"/>
+                                        <h:outputText value="#{getRecetasBean.receta.tprep} #{lang['recipe.view.min']}"/>
                                         <h:outputLabel value="#{lang['recipe.info.cookt']}: "/>
-                                        <h:outputText value="#{getRecetasBean.receta.tcook} minutes"/>
+                                        <h:outputText value="#{getRecetasBean.receta.tcook} #{lang['recipe.view.min']}"/>
                                         <h:outputLabel value="#{lang['recipe.info.portions']}: "/>
-                                        <h:outputText value="#{getRecetasBean.receta.porcion} servings"/>
+                                        <h:outputText value="#{getRecetasBean.receta.porcion} #{lang['recipe.view.serve']}"/>
                                     </h:panelGrid>
                                 </h:panelGroup>
                                 <h:panelGroup>

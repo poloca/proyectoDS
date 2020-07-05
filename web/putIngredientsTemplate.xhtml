@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./templates/generalTemplate_NS.xhtml">
+
+            <ui:define name="content">
+                
+                <h:form id="form">
+                   
+                    <h:form>
+                    <h1>
+                        Agregar Ingrediente
+                    </h1>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel value="Id Receta" for="idrec"></h:outputLabel>
+                            <p:inputText id="idrec" value="#{ixRBean.ixr.idReceta}" required="false"/>
+                            
+                            <h:outputLabel value="Id Ingrediente" for="iding"></h:outputLabel>
+                            <p:inputText id="iding" value="#{ixRBean.ixr.idIngrediente}" required="true"/>
+                            
+                            <h:outputLabel value="Cantidad" for="cant"></h:outputLabel>
+                            <p:inputText id="cant" value="#{ixRBean.ixr.cantidad}" required="true"/>
+
+                            <h:outputLabel value="Medida" for="med"></h:outputLabel>
+                            <p:autoComplete id="med" dropdown="true" scrollHeight="150" value="#{ixRBean.medida}" 
+                                            completeMethod="#{ixRBean.compMedidas}"
+                                        converter="medidasConverter" var="medida"
+                                        itemLabel="#{medida.nombrem}"
+                                        itemValue="#{medida}"
+                                        forceSelection="true" />
+
+                            <p:commandButton id="btn_reset" value="Reset" type="reset"/>
+                            <p:commandButton id="btn_add" value="Add" update=":form:ingrec" action="#{ixRBean.createNew()}" >
+                               
+                            </p:commandButton>
+                        </h:panelGrid>
+                </h:form>
+
+                    <p:outputPanel id="ingrec">
+                        <p:dataTable value="#{ixRBean.ingRec}" var="ingRec" id="ingTable">
+
+                            <p:column headerText="id Receta">
+                                <h:outputText value="#{ingRec.idReceta}" />
+                            </p:column>
+
+                            <p:column headerText="id Ingrediente">
+                                <h:outputText value="#{ingRec.idIngrediente}" />
+                            </p:column>
+                            
+                            <p:column headerText="Cantidad">
+                                <h:outputText value="#{ingRec.cantidad}" />
+                            </p:column>
+                            
+                            <p:column headerText="id Medida">
+                                <h:outputText value="#{ingRec.idMedida}" />
+                            </p:column>
+
+                        </p:dataTable>
+                        <h:panelGrid cellpadding="5" cellspacing="5">
+                            <p:commandButton value="Clear Ingredients" update=":form:ingrec" process=":form:ingrec" action="#{ixRBean.clearList}"/>
+                        </h:panelGrid>
+                        
+                    </p:outputPanel>
+                    <h:commandButton value="registrar" action="#{ixRBean.createNew()}" style=" margin-top: 10px"/>
+                </h:form>
+                
+                
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

@@ -36,7 +36,8 @@ public class IngxRecFacade extends AbstractFacade<IngxRec> implements IngxRecFac
         
         try {
              ixr = em.createQuery("SELECT i FROM IngxRec i WHERE i.idReceta = :idReceta")
-                    .setParameter(":idReceta", recid).getResultList();
+                    .setParameter("idReceta", recid)
+                    .getResultList();
                      
              return ixr;
 

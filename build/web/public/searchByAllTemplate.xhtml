@@ -20,15 +20,18 @@
                                     <f:attribute name="recid" value="#{rec.idReceta}"/>
                                 </h:commandLink>
                                 <p:outputPanel>
-                                    <h:panelGrid columns="2" cellpadding="5px" cellspacing="5px" >
+                                    <h:panelGrid columns="3" cellpadding="5px" cellspacing="5px" >
                                         <h:outputText value="#{lang['recipe.info.prept']}" />
                                         <h:outputText value="#{rec.tprep}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.min']}"/>
 
                                         <h:outputText value="#{lang['recipe.info.cookt']}" />
                                         <h:outputText value="#{rec.tcook}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.min']}"/>
 
                                         <h:outputText value="#{lang['recipe.info.dif']}" />
                                         <h:outputText value="#{rec.dificultad}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.serve']}"/>
                                     </h:panelGrid>
                                 </p:outputPanel>
                             </h:panelGrid>

@@ -16,11 +16,20 @@
                     <h:panelGrid columns="2" cellpadding="5px" cellspacing="5px">
                         <h:outputLabel for="medida" value="Medidas:"/>
                         
-                        <p:autoComplete id="medida" value="#{ingredientesTBean.medida}" 
+                        <p:autoComplete id="medidarec" dropdown="true" value="#{ingredientesTBean.medida}" 
                                         completeMethod="#{ingredientesTBean.compMedidas}"
-                                        converter="medidasConverter" var="medida"
-                                        itemLabel="#{medida.nombrem}"
-                                        itemValue="#{medida.idMedida}"
+                                        converter="medidasConverter" var="medidarec"
+                                        itemLabel="#{medidarec.nombrem}"
+                                        itemValue="#{medidarec}"
+                                        forceSelection="true" />
+                        
+                        <h:outputLabel for="ingrediente" value="Ingredientes:"/>
+                        
+                        <p:autoComplete id="ingredienterec" dropdown="true" maxResults="10" autoSelection="true" autoHighlight="true" value="#{ingredientesTBean.ingrediente}" 
+                                        completeMethod="#{ingredientesTBean.compIngredientes(query)}"
+                                        converter="ingredientesConverter" var="ingredienterec"
+                                        itemLabel="#{ingredienterec.nombrei}"
+                                        itemValue="#{ingredienterec}"
                                         forceSelection="true" />
                         
                     </h:panelGrid>

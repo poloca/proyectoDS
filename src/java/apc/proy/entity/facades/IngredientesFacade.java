@@ -45,4 +45,22 @@ public class IngredientesFacade extends AbstractFacade<Ingredientes> implements 
         }
     }
     
+    @Override
+    public Ingredientes findIngredienteNombre(String nombrei) {
+
+        Ingredientes Ingrediente;
+
+        try {
+            Ingrediente = (Ingredientes) em.createQuery("SELECT i FROM Ingredientes i WHERE i.nombrei = :nombrei")
+                    .setParameter("nombrei", nombrei)
+                    .getSingleResult();
+
+            return Ingrediente;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
 }

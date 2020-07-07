@@ -48,17 +48,17 @@
                 <div id="left">
                     <h:form>
                         <p:menu toggleable="true" style="width: 90%">
-                            <p:submenu label="#{sessionBean.user}" icon="pi pi-user">
+                            <p:submenu label="#{lang['profile.login']}" icon="pi pi-user">
                                 <p:menuitem value="#{lang['temp.session.pf']}" icon="pi pi-home" outcome="/login/profileTemplate"/>
                                 <p:menuitem action="#{loginBack.logout()}" value="#{lang['temp.session.lo']}" icon="pi pi-sign-out"/>
                             </p:submenu>
-                            <p:submenu label="#{lang['profile.col']} ( #{tableCollectionBean.ncol} )" icon="pi pi-bookmark">
+                            <p:submenu label="#{lang['profile.col']} ( #{tableCollectionBean.ncol} )" icon="pi pi-bookmark" style="font-size: 13px">
                                 <p:menuitem value="#{lang['collection.title']}" outcome="/login/collectionTemplate" icon="pi pi-plus"/>
                                 <p:menuitem value="#{lang['temp.gen.view']}" outcome="/login/collectionViewTemplate" icon="pi pi-bars"/>
                             </p:submenu>
-                            <p:submenu label="#{lang['profile.works']}" icon="pi pi-list">
-                                <p:menuitem value="#{lang['recipe.top']}" outcome="/login/submitTemplate" icon="pi pi-plus"/>
-                                <p:menuitem value="#{lang['temp.gen.view']}" icon="pi pi-bars"/>
+                            <p:submenu label="#{lang['profile.works']} ( #{getRecetasUsuarioBean.nrec} )" icon="pi pi-list" style="font-size: 13px">
+                                <p:menuitem value="#{lang['recipe.top']}" outcome="/login/submitRecetaTemplate" icon="pi pi-plus"/>
+                                <p:menuitem value="#{lang['temp.gen.view']}" outcome="/login/allUserRecetasTemplate" icon="pi pi-bars"/>
                             </p:submenu>
                         </p:menu>
                     </h:form>

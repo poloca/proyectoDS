@@ -55,6 +55,18 @@ public class TableCollectionBean implements Serializable{
         ncol= colecciones.size();
     }
     
+    public Colecciones getColeccionesNombre(Integer id){
+        if(id==null){
+            throw new IllegalArgumentException("Select a valid option");
+        }
+        for(Colecciones col: colecciones){
+            if(id.equals(col.getIdColeccion())){
+                return col;
+            }
+        }
+        return null;
+    }
+    
     public void deleteCol() {
         colFacade.remove(coleccion);
         colecciones.remove(coleccion);

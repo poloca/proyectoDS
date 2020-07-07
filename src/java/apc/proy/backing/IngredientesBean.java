@@ -26,9 +26,8 @@ public class IngredientesBean implements Serializable{
     private IngredientesFacadeLocal ingFacade;
     
     private List<Ingredientes> ingredientes;
-    /**
-     * Creates a new instance of IngredientesBean
-     */
+    
+    
     public IngredientesBean() {
     }
 
@@ -39,6 +38,18 @@ public class IngredientesBean implements Serializable{
     
     public void consultarIngredientes(){
         ingredientes= ingFacade.findAllIng();
+    }
+    
+    public Ingredientes getIngredientesNombre(Integer id){
+        if(id==null){
+            throw new IllegalArgumentException("Select a valid option");
+        }
+        for(Ingredientes ing: ingredientes){
+            if(id.equals(ing.getIdIngrediente())){
+                return ing;
+            }
+        }
+        return null;
     }
     
     public List<Ingredientes> getIngredientes() {

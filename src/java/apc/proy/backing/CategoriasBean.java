@@ -40,6 +40,18 @@ public class CategoriasBean implements Serializable {
     public void consultarCategorias(){
         categorias= catFacade.findAllCat();
     }
+    
+    public Categorias getCategoriasNombre(Integer id){
+        if(id==null){
+            throw new IllegalArgumentException("Select a valid option");
+        }
+        for(Categorias cat: categorias){
+            if(id.equals(cat.getIdCategoria())){
+                return cat;
+            }
+        }
+        return null;
+    }
 
     public List<Categorias> getCategorias() {
         return categorias;

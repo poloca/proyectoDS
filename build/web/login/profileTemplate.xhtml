@@ -16,12 +16,11 @@
                 <div id="top" class="top">
                     <div>
                         <h1>
-                            <h:outputText value="#{sessionBean.user} id# #{sessionBean.userid}"/>
+                            <h:outputText value="#{lang['profile.login']}"/>
                         </h1>
                         <h2>
                             <h:button style="float: left" value="#{lang['profile.config']}" outcome="eUserTemplate"/>
-                            <h:button style="float: right" value="#{lang['profile.new']}" outcome="submitTemplate"/>
-                            <h:button style="float: right" value="check" outcome="recetaTemplate"/>
+                            <h:button style="float: right" value="#{lang['profile.new']}" outcome="submitRecetaTemplate"/>
                         </h2>
                     </div>
                     <div style="padding-top: 40px">

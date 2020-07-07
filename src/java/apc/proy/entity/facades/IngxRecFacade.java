@@ -6,6 +6,7 @@
 package apc.proy.entity.facades;
 
 import apc.proy.entity.IngxRec;
+import apc.proy.model.dto.IRNombres;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,5 +46,31 @@ public class IngxRecFacade extends AbstractFacade<IngxRec> implements IngxRecFac
             return null;
         }
     }
+    
+    @Override
+    public List<IRNombres> findIRNamesByReceta(int recid){
+        List<IRNombres> ixrnames;
+        
+        String strSQL = "";
+        
+        strSQL = strSQL + "SELECT j.nombrei,i.cantidad,k.nombrem FROM IngxRec i ";
+        strSQL = strSQL + "INNER JOIN Ingredientes j ON i.idIngrediente = j.idIngrediente ";
+        strSQL = strSQL + "INNER JOIN Medidas k ON i.idMedida = k.idMedida ";
+        strSQL = strSQL + "WHERE i.idReceta = :idReceta";
+                
+        try {
+             //ixr = em.createQuery("SELECT i FROM IngxRec i WHERE i.idReceta = :idReceta")
+             ixrnames= em.createQuery(strSQL)
+                    .setParameter("idReceta", recid)
+                    .getResultList();
+                     
+             return ixrnames;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    
     
 }

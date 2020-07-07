@@ -5,13 +5,14 @@
  */
 package apc.proy.backing;
 
-import apc.proy.entity.IngxRec;
 import apc.proy.entity.Receta;
 import apc.proy.entity.facades.CategoriasFacadeLocal;
+import apc.proy.entity.facades.ColeccionesFacadeLocal;
 import apc.proy.entity.facades.IngxRecFacadeLocal;
 import apc.proy.entity.facades.RecetaFacadeLocal;
 import apc.proy.entity.facades.UsuarioFacadeLocal;
 import apc.proy.model.dto.IRNombres;
+import apc.proy.session.SessionUtils;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -27,9 +29,9 @@ import javax.faces.event.ActionEvent;
  */
 @ManagedBean
 @SessionScoped
-public class GetRecetasBean implements Serializable {
-
-    @EJB 
+public class GetRecetasUsuarioBean implements Serializable {
+    
+    @EJB
     private RecetaFacadeLocal recFacade;
     @EJB 
     private CategoriasFacadeLocal catFacade;
@@ -37,55 +39,86 @@ public class GetRecetasBean implements Serializable {
     private UsuarioFacadeLocal userFacade;
     @EJB 
     private IngxRecFacadeLocal ixrFacade;
+    @EJB
+    private ColeccionesFacadeLocal colFacade;
     
-    private List<Receta> recetas;
+    private List<Receta> recetasUN;
     private List<IRNombres> ingredientesRec;
     private Receta receta;
+    private Receta recetadel;
     private Integer idreceta;
     private String usern;
     private String catn;
+    private String coln;
+    private int nrec;
     
-    
-    public GetRecetasBean() {
+    public GetRecetasUsuarioBean() {
     }
     
     @PostConstruct
     public void inicializar(){
+        HttpSession session = SessionUtils.getSession();
+        int iduser= Integer.parseInt((String) session.getAttribute("userid"));
         receta= new Receta();
         ingredientesRec= new ArrayList<IRNombres>();
-        consultarAllRecetas();
+        consultarRecByUser(iduser);
+    }
+    
+    public int getNrec() {
+        return nrec;
+    }
+
+    public void setNrec(int nrec) {
+        this.nrec = nrec;
+    }
+    
+    public void consultarRecByUser(int userid){
+        recetasUN= recFacade.findRecetasByUN(userid);
+        nrec= recetasUN.size();
     }
     
     public void recetaListener(ActionEvent event){
-
-	idreceta = (Integer)event.getComponent().getAttributes().get("recid");
-
+        idreceta = (Integer)event.getComponent().getAttributes().get("recid");
     }
     
-    public void consultarAllRecetas(){
-        recetas= recFacade.findAll();
-    }
-    
-    public String consultarRecetaByid(){
-        receta= recFacade.findRecetaByid(idreceta);
+    public String consultarUserRecetaByid(){
+        //receta= recFacade.findRecetaByid(idreceta);
         
         int idcat= receta.getIdCategoria();
         int iduser= receta.getIdUsuario();
+        int idcol= receta.getIdColeccion();
+        coln= colFacade.findColeccionByid(idcol);
         catn= catFacade.findCategoriaByid(idcat);
         usern= userFacade.findUserNombreByid(iduser);
         
         ingredientesRec= ixrFacade.findIRNamesByReceta(idreceta);
         
         
-        return "/faces/publishedTemplate";
+        return "/login/publishedUserTemplate";
     }
     
-    public List<Receta> getRecetas() {
-        return recetas;
+    public String deleteReceta(){
+        recFacade.remove(receta);
+        
+        return "/login/profileTemplate";
     }
 
-    public void setRecetas(List<Receta> recetas) {
-        this.recetas = recetas;
+    
+    
+    public List<Receta> getRecetasUN() {
+        return recetasUN;
+    }
+
+    public void setRecetasUN(List<Receta> recetasUN) {
+        this.recetasUN = recetasUN;
+    }
+
+    public List<IRNombres> getIngredientesRec() {
+        return ingredientesRec;
+    }
+
+    public void setIngredientesRec(List<IRNombres> ingredientesRec) {
+        this.ingredientesRec = ingredientesRec;
     }
 
     public Receta getReceta() {
@@ -95,6 +128,16 @@ public class GetRecetasBean implements Serializable {
     public void setReceta(Receta receta) {
         this.receta = receta;
     }
+
+    public Receta getRecetadel() {
+        return recetadel;
+    }
+
+    public void setRecetadel(Receta recetadel) {
+        this.recetadel = recetadel;
+    }
+    
+    
 
     public Integer getIdreceta() {
         return idreceta;
@@ -120,11 +163,13 @@ public class GetRecetasBean implements Serializable {
         this.catn = catn;
     }
 
-    public List<IRNombres> getIngredientesRec() {
-        return ingredientesRec;
+    public String getColn() {
+        return coln;
     }
 
-    public void setIngredientesRec(List<IRNombres> ingredientesRec) {
-        this.ingredientesRec = ingredientesRec;
+    public void setColn(String coln) {
+        this.coln = coln;
     }
+    
+
 }

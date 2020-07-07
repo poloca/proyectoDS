@@ -38,6 +38,17 @@ public class MedidasBean {
         medidas=medfacade.findAllMed();
     }
     
+    public Medidas getMedidasNombre(Integer id){
+        if(id==null){
+            throw new IllegalArgumentException("Select a valid option");
+        }
+        for(Medidas med: medidas){
+            if(id.equals(med.getIdMedida())){
+                return med;
+            }
+        }
+        return null;
+    }
     
     public List<Medidas> getMedidas() {
         return medidas;

@@ -5,18 +5,18 @@
  */
 package apc.proy.backing;
 
+import apc.proy.entity.Ingredientes;
 import apc.proy.entity.IngxRec;
-import apc.proy.entity.Medidas;
+import apc.proy.entity.facades.IngredientesFacadeLocal;
 import apc.proy.entity.facades.IngxRecFacadeLocal;
+import apc.proy.model.dto.IRNombres;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
@@ -28,34 +28,35 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class IxRBean implements Serializable {
 
-    @ManagedProperty("#{medidasBean}")
-    private MedidasBean datam;
-    
-    
     @EJB
     private IngxRecFacadeLocal ixrFacade;
+    @EJB
+    private IngredientesFacadeLocal ingFacade;
 
-    private List<IngxRec> ingredientes;
-    private List<IngxRec> ingredientes2;
+    private List<Ingredientes> ingredientes;
+    private Ingredientes ingrediente;
 
     private List<IngxRec> ingRec;
+    private List<IRNombres> ingRecnom;
 
     private IngxRec ixr;
-    private Medidas medida;
+    private IRNombres ixrnom;
+    private String extra;
 
     public IxRBean() {
     }
 
     @PostConstruct
     public void inicializar() {
-        consultarIngxRec();
-        consultarAllIR();
         ixr = new IngxRec();
-        medida= new Medidas();
+        ixrnom= new IRNombres();
+        ingrediente= new Ingredientes();
         ingRec = new ArrayList<IngxRec>();
+        ingRecnom= new ArrayList<IRNombres>();
     }
 
     public String registrar() {
+        String n= extra;
         for(IngxRec ixrL :ingRec){
             ixrL.setIdReceta(3);
             ixrFacade.create(ixrL);
@@ -65,35 +66,28 @@ public class IxRBean implements Serializable {
     }
 
     public void createNew() {
-        int mid= medida.getIdMedida();
-        ixr.setIdMedida(mid);
+        int ingid= ingrediente.getIdIngrediente();
+        String ingnom= ingrediente.getNombrei();
+        String cant= ixr.getCantidad();
+        String med= ixr.getIdMedida().toString();
+        ixrnom.setNombrei(ingnom);
+        ixrnom.setCantidad(cant);
+        ixrnom.setNombrem(med);
+        ixr.setIdIngrediente(ingid);
         ixr.setIdReceta(0);
         ingRec.add(ixr);
+        ingRecnom.add(ixrnom);
         ixr = new IngxRec();
+        ixrnom= new IRNombres();
         
     }
     
     public void clearList(){
         ingRec.clear();
+        ingRecnom.clear();
     }
     
-    public void consultarIngxRec() {
-        ingredientes = ixrFacade.findIRByReceta(3);
-    }
 
-    
-    
-    public void consultarAllIR() {
-        ingredientes2 = ixrFacade.findAll();
-    }
-
-    public List<Medidas> compMedidas(String query){
-        String queryLowerCase = query.toLowerCase();
-        List<Medidas> allMed= datam.getMedidas();
-        return allMed.stream().filter(t -> t.getNombrem().toLowerCase().startsWith(queryLowerCase)).collect(Collectors.toList());
-    }
-    
-    
     
     
     public IngxRec getIxr() {
@@ -104,22 +98,6 @@ public class IxRBean implements Serializable {
         this.ixr = ixr;
     }
 
-    public List<IngxRec> getIngredientes() {
-        return ingredientes;
-    }
-
-    public void setIngredientes(List<IngxRec> ingredientes) {
-        this.ingredientes = ingredientes;
-    }
-
-    public List<IngxRec> getIngredientes2() {
-        return ingredientes2;
-    }
-
-    public void setIngredientes2(List<IngxRec> ingredientes2) {
-        this.ingredientes2 = ingredientes2;
-    }
-
     public List<IngxRec> getIngRec() {
         return ingRec;
     }
@@ -128,20 +106,46 @@ public class IxRBean implements Serializable {
         this.ingRec = ingRec;
     }
 
-    public MedidasBean getDatam() {
-        return datam;
+    public List<Ingredientes> getIngredientes() {
+        return ingredientes;
     }
 
-    public void setDatam(MedidasBean datam) {
-        this.datam = datam;
+    public void setIngredientes(List<Ingredientes> ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
-    public Medidas getMedida() {
-        return medida;
+    public Ingredientes getIngrediente() {
+        return ingrediente;
     }
 
-    public void setMedida(Medidas medida) {
-        this.medida = medida;
+    public void setIngrediente(Ingredientes ingrediente) {
+        this.ingrediente = ingrediente;
     }
+
+    public List<IRNombres> getIngRecnom() {
+        return ingRecnom;
+    }
+
+    public void setIngRecnom(List<IRNombres> ingRecnom) {
+        this.ingRecnom = ingRecnom;
+    }
+
+    public IRNombres getIxrnom() {
+        return ixrnom;
+    }
+
+    public void setIxrnom(IRNombres ixrnom) {
+        this.ixrnom = ixrnom;
+    }
+
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+    
+    
     
 }

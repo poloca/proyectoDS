@@ -43,4 +43,13 @@ public class SessionBean implements Serializable {
         return userid;
     }
 
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+    
+
 }

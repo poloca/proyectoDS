@@ -13,7 +13,7 @@
             <ui:define name="content">
                 <div id="top" class="top">
                     <h:form> 
-                        <p:dataScroller value="#{getRecetasBean.recetas}" var="rec" chunkSize="10" >
+                        <p:dataScroller value="#{getRecetasBean.recetas}" var="rec" chunkSize="10">
                             <h:panelGrid columns="2"  style="width:100%" columnClasses=" forty-percent, sixty-percent">
                                 <h:commandLink value="#{rec.nombrer}" action="#{getRecetasBean.consultarRecetaByid}"
                                                actionListener="#{getRecetasBean.recetaListener}">

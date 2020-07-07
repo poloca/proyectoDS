@@ -45,5 +45,21 @@ public class ColeccionesFacade extends AbstractFacade<Colecciones> implements Co
             return null;
         }
     }
+    
+    @Override
+    public String findColeccionByid(int colid){
+        String colNom;
+        
+        try {
+            colNom= (String) em.createQuery("SELECT c FROM Colecciones c WHERE c.idColeccion = :idColeccion")
+                    .setParameter("idColeccion", colid)
+                    .getSingleResult();
+
+            return colNom;
+
+        } catch (Exception e) {
+            return null;
+        }
+    }
 
 }

@@ -32,4 +32,6 @@ public interface ColeccionesFacadeLocal {
     
     public List<Colecciones> findByUN(int iduser);
     
+    public String findColeccionByid(int colid);
+    
 }

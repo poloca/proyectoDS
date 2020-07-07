@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Receta.findByPreparacion", query = "SELECT r FROM Receta r WHERE r.preparacion = :preparacion")})
 public class Receta implements Serializable {
 
+    
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,6 +50,8 @@ public class Receta implements Serializable {
     private Integer idUsuario;
     @Column(name = "id_categoria")
     private Integer idCategoria;
+    @Column(name = "id_coleccion")
+    private Integer idColeccion;
     @Size(max = 100)
     @Column(name = "nombrer")
     private String nombrer;
@@ -93,6 +97,14 @@ public class Receta implements Serializable {
 
     public void setIdCategoria(Integer idCategoria) {
         this.idCategoria = idCategoria;
+    }
+    
+    public Integer getIdColeccion() {
+        return idColeccion;
+    }
+
+    public void setIdColeccion(Integer idColeccion) {
+        this.idColeccion = idColeccion;
     }
 
     public String getNombrer() {
@@ -167,5 +179,4 @@ public class Receta implements Serializable {
     public String toString() {
         return "apc.proy.entity.Receta[ idReceta=" + idReceta + " ]";
     }
-    
 }

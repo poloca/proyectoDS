@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
@@ -44,29 +45,29 @@
                         </div>
                         <div>
                             <h2>#{lang['recipe.seccion.ingr']}</h2>
-                            <h:panelGrid columns="2" cellpadding="15" cellspacing="5">
-                                <h:panelGroup>
-                                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                                        <h:outputText value="Ingrediente"/>
-                                    </h:panelGrid>
-                                </h:panelGroup>
-                                <h:panelGroup>
-                                    <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                                        <h:outputLabel value="Medida"/>
-                                        <h:outputText value="Medida nom"/>
-                                    </h:panelGrid>
-                                </h:panelGroup>
+                            <h3>
+                                <h:panelGrid columns="2" width="50%" columnClasses="forty-percent, sixty-percent">
+                                <h:outputText value="#{lang['recipe.ingr.ing']}"/>
+                                <h:outputText value="#{lang['recipe.ingr.quant']}"/>
                             </h:panelGrid>
+                            </h3>
+                            <ui:repeat value="#{getRecetasBean.ingredientesRec}" var="ixr">
+                                <h:panelGrid columns="2" width="50%" columnClasses="forty-percent, sixty-percent" cellpadding="5px">
+                                    <h:outputText value="#{ixr[0]}"/>
+                                    <h:panelGroup>
+                                        <h:panelGrid columns="2" cellpadding="5px">
+                                            <h:outputText value="#{ixr[1]}"/>
+                                            <h:outputText value="#{ixr[2]}"/>
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+                                </h:panelGrid>
+                            </ui:repeat>
                         </div>
                         <div>
                             <h2>#{lang['recipe.seccion.prep']}</h2>
                             <h:outputText value="#{getRecetasBean.receta.preparacion}"
                                              style="height: 170px; width: 90%"/>
                             
-                        </div>
-                        <div style="padding-top: 20px">
-                            <h:button style="float: right" value="#{lang['recipe.button.edit']}"/>
-                            <h:button value="#{lang['recipe.button.back']}" />
                         </div>
                     </div>
                 </div>

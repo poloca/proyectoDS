@@ -6,6 +6,7 @@
 package apc.proy.entity.facades;
 
 import apc.proy.entity.Receta;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,6 +42,38 @@ public class RecetaFacade extends AbstractFacade<Receta> implements RecetaFacade
             return Rec;
 
         } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Receta> findRecetasByUN(int userid){
+        List<Receta> recetasU;
+        
+        try{
+            recetasU= em.createQuery("SELECT r FROM Receta r WHERE r.idUsuario = :idUsuario")
+                    .setParameter("idUsuario", userid).getResultList();
+            
+            return recetasU;
+            
+        } catch (Exception e) {
+            
+            return null;
+        }
+    }
+    
+    @Override
+    public List<Receta> findRecetasByCol(int colid){
+        List<Receta> recetasC;
+        
+        try{
+            recetasC= em.createQuery("SELECT r FROM Receta r WHERE r.idColeccion = :idColeccion")
+                    .setParameter("idColeccion", colid).getResultList();
+            
+            return recetasC;
+            
+        } catch (Exception e) {
+            
             return null;
         }
     }

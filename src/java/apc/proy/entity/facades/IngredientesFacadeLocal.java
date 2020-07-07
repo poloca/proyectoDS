@@ -6,6 +6,7 @@
 package apc.proy.entity.facades;
 
 import apc.proy.entity.Ingredientes;
+import apc.proy.model.dto.IRNombres;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -32,4 +33,7 @@ public interface IngredientesFacadeLocal {
     
     public List<Ingredientes> findAllIng();
     
+    public Ingredientes findIngredienteNombre(String nombrei);
+    
+   
 }

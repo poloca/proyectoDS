@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/worksTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form id="form">
+                    <div id="top" class="top" style=" padding-left: 50px" >
+                        <h1 style="font-size: 24px">#{lang['recipe.top']}</h1>
+                        <div>
+                            <h2>#{lang['recipe.seccion.info']}</h2>
+                            <div>
+                                <h:panelGrid columns="2" style="width: 100%" columnClasses="sixty-percent, forty-percent">
+                                    <h:panelGroup id="nombrer" style="width: 100%">
+                                        <h:panelGrid columns="2" style="width: 100%">
+                                            <h:outputLabel value="#{lang['form.fill.name']}: "/>
+                                            <h:inputText  style="width: 100%" value="#{recetasBean.receta.nombrer}"
+                                                          required="false"
+                                                          requiredMessage="#{lang['required.err']}"/>
+                                        </h:panelGrid>
+                                    </h:panelGroup>
+                                    <h:message for = "nombrer" />
+                                </h:panelGrid>
+                            </div>
+                            <h:panelGrid columns="2">
+                                <h:panelGroup>
+                                    <h:panelGrid columns="3" cellpadding="5" cellspacing="5">
+                                        <h:outputLabel value="#{lang['recipe.info.cat']}: "/>
+                                        <p:selectOneMenu value="#{recetasBean.categoria}" effect="fade" converter="categoriasConverter" 
+                                                         required="false"
+                                                         requiredMessage="#{lang['required.err']}">
+                                            <f:selectItems value="#{categoriasBean.categorias}" var="cat" itemLabel="#{cat.nombrec}" itemValue="#{cat}"/>
+                                        </p:selectOneMenu>
+                                        <h:message for = "categoria" />
+
+                                        <h:outputLabel value="#{lang['recipe.info.prept']}: "/>
+                                        <h:panelGrid columns="2">
+                                            <h:inputText id="preptime" value="#{recetasBean.receta.tprep}"
+                                                         required="false"
+                                                         requiredMessage="#{lang['required.err']}"/>
+                                            <h:outputText value="#{lang['recipe.view.min']}"/>
+                                    </h:panelGrid>
+                                    <h:message for = "preptime" />
+
+                                    <h:outputLabel value="#{lang['recipe.info.cookt']}: "/>
+                                    <h:panelGrid columns="2">
+                                        <h:inputText id="cooktime" value="#{recetasBean.receta.tcook}"
+                                                     required="false"
+                                                     requiredMessage="#{lang['required.err']}"/>
+                                        <h:outputText value="#{lang['recipe.view.min']}"/>
+                                </h:panelGrid>
+                                <h:message for = "cooktime" />
+
+                                <h:outputLabel value="#{lang['recipe.info.portions']}: "/>
+                                <h:panelGrid columns="2">
+                                    <h:inputText id="portion" value="#{recetasBean.receta.porcion}"
+                                                 required="false"
+                                                 requiredMessage="#{lang['required.err']}"/>
+                                    <h:outputText value="#{lang['recipe.view.serve']}"/>
+                            </h:panelGrid>
+                            <h:message for = "portion" />
+
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h3 style=" padding-left: 150px">#{lang['recipe.info.dif']}</h3>
+                        <h:panelGrid columns="2" style=" padding-left: 150px">
+                            <h:selectOneRadio layout="pageDirection" value="#{recetasBean.receta.dificultad}" id="dificult" 
+                                              required="false" requiredMessage="#{lang['required.err']}">
+                                <f:selectItem itemValue="H" itemLabel="#{lang['recipe.info.dif.high']}"/>
+                                <f:selectItem itemValue="M" itemLabel="#{lang['recipe.info.dif.med']}"/>
+                                <f:selectItem itemValue="L" itemLabel="#{lang['recipe.info.dig.low']}"/>
+                            </h:selectOneRadio>
+                            <h:message for = "dificult" />
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:panelGrid>
+            </div>
+            <div>
+                <h2>#{lang['recipe.seccion.ingr']}</h2>
+
+                <h:panelGrid columns="3" cellpadding="5" cellspacing="5">
+                    <h:outputLabel value="#{lang['recipe.ingr.ing']}: "/>
+                    <h:outputLabel value="#{lang['recipe.ingr.quant']}: "/>
+                    <h:outputLabel value=""/>
+
+                    <h:inputText id="ingredient" value="#{recetasBean.ingr}" required="false"
+                                 requiredMessage="#{lang['required.err']}"/>
+                    <h:panelGroup>
+                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                            <h:inputText id="quant" value="#{recetasBean.cant}" required="false"
+                                         requiredMessage="#{lang['required.err']}">
+                            </h:inputText>
+                            <p:selectOneMenu value="#{recetasBean.medida}" effect="fade" converter="medidasConverter">
+                                <f:selectItems value="#{medidasBean.medidas}" var="med" itemLabel="#{med.nombrem}" itemValue="#{med}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                    <h:panelGroup>
+                        <h:message for = "ingredient" />
+                        <h:message for = "quant" />
+                    </h:panelGroup>
+
+                    <p:commandButton id="btn_reset" value="Reset" type="reset"/>
+                    <p:commandButton id="btn_add" value="#{lang['add.button']}" update="ingrec" action="#{recetasBean.createIRLista()}" />
+                </h:panelGrid>
+
+
+                <p:outputPanel id="ingrec">
+                    <p:dataTable value="#{recetasBean.ingRecnom}" var="ingRec" id="ingTable" style="width: 70%; padding: 10px">
+
+                        <p:column headerText="#{lang['recipe.ingr.ing']}">
+                            <h:outputText value="#{ingRec.nombrei}" />
+                        </p:column>
+
+                        <p:column headerText="#{lang['recipe.ingr.quant']}">
+                            <h:outputText value="#{ingRec.cantidad}" />
+                        </p:column>
+
+                        <p:column headerText="#{lang['recipe.ingr.mes']}">
+                            <h:outputText value="#{ingRec.nombrem}" />
+                        </p:column>
+
+                    </p:dataTable>
+                    <h:panelGrid cellpadding="5" cellspacing="5">
+                        <p:commandButton value="#{lang['recipe.button.clr']}" update=":form:ingrec" process=":form:ingrec" action="#{recetasBean.clearListaIR()}"/>
+                    </h:panelGrid>
+
+                </p:outputPanel>
+
+
+            </div>
+            <div>
+                <h2>#{lang['recipe.seccion.prep']}</h2>
+                <h:inputTextarea id="preparation" value="#{recetasBean.receta.preparacion}"
+                                 style="height: 170px; width: 90%"
+                                 required="false"/>
+                <h:message for = "preparation" />
+            </div>
+            <div>
+                <h:panelGrid columns="3" cellpadding="5px" cellspacing="5">
+                    <h:outputLabel value="#{lang['recipe.info.col']}: "/>
+                    <p:selectOneMenu value="#{recetasBean.coleccion}" effect="fade" converter="coleccionConverter">
+                        <f:selectItems value="#{tableCollectionBean.colecciones}" var="col" itemLabel="#{col.nombrecol}" itemValue="#{col}"/>
+                    </p:selectOneMenu>
+                    <h:message for = "preptime" />
+                </h:panelGrid>
+            </div>
+            <div style="padding-top: 20px">
+                <h:panelGrid columns="2" cellspacing="5px" cellpadding="10px">
+                    <p:commandButton value="#{lang['recipe.button.pub']}" icon="pi pi-plus" action="#{recetasBean.createReceta()}"/>
+                    <p:button value="#{lang['recipe.button.back']}" outcome="/login/profileTemplate"/>
+                </h:panelGrid>
+            </div>
+        </div>
+    </h:form>
+</ui:define>
+
+</ui:composition>
+
+</body>
+</html>

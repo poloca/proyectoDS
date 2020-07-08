@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <ui:composition template="./../templates/generalTemplate_IS.xhtml">
+
+            <ui:define name="content">
+                <div id="top" class="top">
+                    <h1 style="font-size: 24px; padding: 10px">
+                        #{lang['profile.col']}
+                    </h1>
+                    <h:form>
+                        <h:panelGrid columns="4" cellspacing="5px" cellpadding="5px">
+                            <h:outputLabel value="#{lang['recipe.info.col']}: "/>
+                            <p:selectOneMenu id="coleccion" value="#{getRecetasUsuarioBean.coleccion}" effect="fade" converter="coleccionConverter"
+                                             required="true"
+                                             requiredMessage="#{lang['required.err']}">
+                                <f:selectItems value="#{tableCollectionBean.colecciones}" var="col" itemLabel="#{col.nombrecol}" itemValue="#{col}"/>
+                            </p:selectOneMenu>
+                            <h:message for = "coleccion" />
+                            <h:commandButton value="Search" action="#{getRecetasUsuarioBean.consultarRecByCol()}"/>
+
+                        </h:panelGrid>
+                    </h:form>
+
+                    <h:form> 
+                        <p:dataScroller value="#{getRecetasUsuarioBean.recetasCOL}" var="rec" chunkSize="10">
+                            <h:panelGrid columns="2"  style="width:100%" columnClasses=" forty-percent, sixty-percent">
+                                <h:commandLink value="#{rec.nombrer}" action="#{getRecetasUsuarioBean.consultarUserRecetaByid()}"
+                                               actionListener="#{getRecetasUsuarioBean.recetaListener}">
+                                    <f:attribute name="recid" value="#{rec.idReceta}"/>
+                                </h:commandLink>
+                                <p:outputPanel>
+                                    <h:panelGrid columns="3" cellpadding="5px" cellspacing="5px" >
+                                        <h:outputText value="#{lang['recipe.info.prept']}" />
+                                        <h:outputText value="#{rec.tprep}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.min']}"/>
+
+                                        <h:outputText value="#{lang['recipe.info.cookt']}" />
+                                        <h:outputText value="#{rec.tcook}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.min']}"/>
+
+                                        <h:outputText value="#{lang['recipe.info.dif']}" />
+                                        <h:outputText value="#{rec.dificultad}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.serve']}"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </p:dataScroller>
+                    </h:form>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

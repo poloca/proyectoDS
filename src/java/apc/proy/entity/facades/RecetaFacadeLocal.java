@@ -36,4 +36,6 @@ public interface RecetaFacadeLocal {
     
     public List<Receta> findRecetasByCol(int colid);
     
+    public List<Receta> findRecetasByCat(int catid);
+    
 }

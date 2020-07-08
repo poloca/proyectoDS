@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <body>
+
+        <ui:composition template="./../templates/generalTemplate_IS.xhtml">
+
+            <ui:define name="content">
+                <div id="top" class="top">
+                    <div style="margin: 20px 0px 10px 0px; padding-bottom: 5px">
+                        <h1 style="font-size: 20px; padding: 10px">
+                            Buscar por Categoria
+                        </h1>
+                        <h:form style="padding-top: 10px">
+                            <p:dataGrid value="#{categoriasBean.categorias}" var="cat"
+                                        columns="3" layout="grid" paginator="false" id="categ"
+                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                        rowsPerPageTemplate="6,12,16" style="font-size:  16px; padding-top: 5px">
+                                <h:link value="#{cat.nombrec}" style="padding: 5px" outcome="/login/searchByCategoriaTemplate_IS"/>
+                            </p:dataGrid>
+                        </h:form>
+
+                    </div>
+                    <div>
+                        <h1 style=" font-size:  20px; padding: 10px">
+                            Buscar por dificultad
+                        </h1>
+                        <h:form>
+                            <h:panelGrid columns="3" cellpadding="10px" cellspacing="10px" style="font-size:  16px;">
+                                <h:link value="#{lang['recipe.info.dif.high']}"/>
+                                <h:link value="#{lang['recipe.info.dif.med']}"/>
+                                <h:link value="#{lang['recipe.info.dig.low']}"/>
+                        </h:panelGrid>
+                        </h:form>
+                    </div>
+                    <div style="margin: 20px 0px 20px 0px; padding-bottom: 5px">
+                        <h1 style=" font-size:  20px; padding: 10px">
+                            Buscar por ingrediente
+                        </h1>
+                        <h:form style="padding-top: 10px">
+                            <p:dataGrid value="#{ingredientesBean.ingredientes}" var="ing"
+                                        columns="3" layout="grid" paginator="false" id="categ"
+                                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                        rowsPerPageTemplate="6,12,16" style="font-size:  16px; padding-top: 5px">
+                                <h:link value="#{ing.nombrei}" style="padding: 5px" outcome="/login/searchByIngredienteTemplate_IS"/>
+                            </p:dataGrid>
+                        </h:form>
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

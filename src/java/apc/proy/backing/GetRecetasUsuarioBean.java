@@ -5,6 +5,7 @@
  */
 package apc.proy.backing;
 
+import apc.proy.entity.Colecciones;
 import apc.proy.entity.Receta;
 import apc.proy.entity.facades.CategoriasFacadeLocal;
 import apc.proy.entity.facades.ColeccionesFacadeLocal;
@@ -21,6 +22,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.ActionEvent;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -28,7 +30,7 @@ import javax.servlet.http.HttpSession;
  * @author desa
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class GetRecetasUsuarioBean implements Serializable {
     
     @EJB
@@ -43,9 +45,11 @@ public class GetRecetasUsuarioBean implements Serializable {
     private ColeccionesFacadeLocal colFacade;
     
     private List<Receta> recetasUN;
+    private List<Receta> recetasCOL;
     private List<IRNombres> ingredientesRec;
     private Receta receta;
     private Receta recetadel;
+    private Colecciones coleccion;
     private Integer idreceta;
     private String usern;
     private String catn;
@@ -77,12 +81,19 @@ public class GetRecetasUsuarioBean implements Serializable {
         nrec= recetasUN.size();
     }
     
+    public String consultarRecByCol(){
+        int colid= coleccion.getIdColeccion();
+        recetasCOL= recFacade.findRecetasByCol(colid);
+        
+        return "/login/recetasColeccionesTemplate";
+    }
+    
     public void recetaListener(ActionEvent event){
         idreceta = (Integer)event.getComponent().getAttributes().get("recid");
     }
     
     public String consultarUserRecetaByid(){
-        //receta= recFacade.findRecetaByid(idreceta);
+        receta= recFacade.findRecetaByid(idreceta);
         
         int idcat= receta.getIdCategoria();
         int iduser= receta.getIdUsuario();
@@ -111,6 +122,22 @@ public class GetRecetasUsuarioBean implements Serializable {
 
     public void setRecetasUN(List<Receta> recetasUN) {
         this.recetasUN = recetasUN;
+    }
+
+    public List<Receta> getRecetasCOL() {
+        return recetasCOL;
+    }
+
+    public void setRecetasCOL(List<Receta> recetasCOL) {
+        this.recetasCOL = recetasCOL;
+    }
+
+    public Colecciones getColeccion() {
+        return coleccion;
+    }
+
+    public void setColeccion(Colecciones coleccion) {
+        this.coleccion = coleccion;
     }
 
     public List<IRNombres> getIngredientesRec() {

@@ -20,17 +20,30 @@
             <div id="top" class="top">
                 <h:graphicImage library="img" name= "bannerProy2.jpeg" width="100%"/>
 
-                <h:panelGrid columns="9" cellpadding="5" cellspacing="5" style=" padding-left: 10px">
-                    <h:link value="#{lang['temp.gen.exp']}" outcome="/login/exploreIndexTemplate_IS"/>
-                    <h:link value="#{lang['temp.gen.search']}" outcome="/login/searchByTemplate_IS"/>
-                    <h:link value="#{lang['temp.gen.about']}" outcome="/login/about_IS"/>
+                <h:panelGrid columns="9" cellspacing="5" style=" padding-left: 10px">
+                    <div class=" dropdown">
+                        <button class=" dropbtn"><a href="/ProyectoAbril/faces/login/exploreIndexTemplate_IS.xhtml">#{lang['temp.gen.exp']}</a></button>
+                    </div>
+                    <div class="dropdown">
+                        <button class=" dropbtn">#{lang['temp.gen.search']}</button>
+                        <div class=" dropdown-content">
+                            <a href="/ProyectoAbril/faces/login/searchByAllTemplate_IS.xhtml">#{lang['temp.gen.searchall']}</a>
+                            <a href="/ProyectoAbril/faces/login/searchByCategoriaTemplate_IS.xhtml">#{lang['recipe.info.cat']}</a>
+                            <a href="/ProyectoAbril/faces/login/searchByIngredienteTemplate_IS.xhtml">#{lang['recipe.seccion.ingr']}</a>
+                        </div>
+                    </div>
+                    <div class=" dropdown">
+                        <button class=" dropbtn"><a href="/ProyectoAbril/faces/login/submitTemplate.xhtml">#{lang['temp.gen.about']}</a></button>
+                    </div>
+                    
                     <h:form>
                         <h:outputLabel value="#{lang['temp.gen.search']}: " />
                         <h:inputText/> 
                     </h:form>
+
                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5" style=" float: left">
                         <h:panelGroup>
-                            <h:panelGrid columns="3">
+                            <h:panelGrid columns="3" >
                                 <h:form>
                                     <h:commandLink value="ES " action="#{langBean.cambiarIdioma('es')}"/>
                                     <h:outputLabel value="/" />

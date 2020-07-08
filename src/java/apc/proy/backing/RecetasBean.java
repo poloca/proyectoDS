@@ -18,6 +18,7 @@ import apc.proy.entity.facades.MedidasFacadeLocal;
 import apc.proy.entity.facades.RecetaFacadeLocal;
 import apc.proy.model.dto.IRNombres;
 import apc.proy.session.SessionUtils;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,7 +29,7 @@ import javax.servlet.http.HttpSession;
 
 @ManagedBean
 @SessionScoped //se cambio en lugar de ViewScoped (temporalmente- despues cambiar)
-public class RecetasBean {
+public class RecetasBean implements Serializable{
 
     @EJB
     private RecetaFacadeLocal recFacade;
@@ -86,7 +87,7 @@ public class RecetasBean {
             ixrFacade.create(ixrL);
         }
         
-        return "/login/allUserRecetasTemplate";
+        return "/login/profileTemplate";
     }
     
     public void createIRLista(){

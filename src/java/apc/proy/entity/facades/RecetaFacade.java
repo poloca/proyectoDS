@@ -78,4 +78,20 @@ public class RecetaFacade extends AbstractFacade<Receta> implements RecetaFacade
         }
     }
     
+    @Override
+    public List<Receta> findRecetasByCat(int catid){
+        List<Receta> recetasCat;
+        
+        try{
+            recetasCat= em.createQuery("SELECT r FROM Receta r WHERE r.idCategoria = :idCategoria")
+                    .setParameter("idCategoria", catid).getResultList();
+            
+            return recetasCat;
+            
+        } catch (Exception e) {
+            
+            return null;
+        }
+    }
+    
 }

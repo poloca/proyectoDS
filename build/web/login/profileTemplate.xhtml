@@ -25,15 +25,7 @@
                     </div>
                     <div style="padding-top: 40px">
                         <h:panelGrid columns="2" cellpadding="5" cellspacing="10">
-                        <h:panelGroup style="padding-left: 50px">
-                            <h:panelGrid>
-                                <h:link value="#{lang['profile.col']} ( #{tableCollectionBean.ncol} )" outcome="collectionViewTemplate"/>
-                                <h:outputText value="Correo: #{registerBean.usuario.correo}"/>
-                                <h:outputText value="Contraseña: #{registerBean.usuario.password}"/>
-                                <h:outputText value="Conf Contraseña: #{registerBean.confPassword}"/>
-                                <h:outputText value="Genero: #{registerBean.usuario.genero}"/>
-                            </h:panelGrid>
-                        </h:panelGroup>
+                        
                         <h:panelGroup style="padding-left: 70px">
                             <h1>
                                 #{lang['temp.gen.latest']}

@@ -5,6 +5,8 @@
  */
 package apc.proy.backing;
 
+import apc.proy.entity.Categorias;
+import apc.proy.entity.Ingredientes;
 import apc.proy.entity.IngxRec;
 import apc.proy.entity.Receta;
 import apc.proy.entity.facades.CategoriasFacadeLocal;
@@ -39,8 +41,12 @@ public class GetRecetasBean implements Serializable {
     private IngxRecFacadeLocal ixrFacade;
     
     private List<Receta> recetas;
+    private List<Receta> recetasCAT;
+    private List<Receta> recetasING;
     private List<IRNombres> ingredientesRec;
     private Receta receta;
+    private Categorias catgoria;
+    private Ingredientes ingrediente;
     private Integer idreceta;
     private String usern;
     private String catn;
@@ -52,7 +58,10 @@ public class GetRecetasBean implements Serializable {
     @PostConstruct
     public void inicializar(){
         receta= new Receta();
+        catgoria= new Categorias();
         ingredientesRec= new ArrayList<IRNombres>();
+        recetasCAT= new ArrayList<Receta>();
+        recetasING= new ArrayList<Receta>();
         consultarAllRecetas();
     }
     
@@ -64,6 +73,20 @@ public class GetRecetasBean implements Serializable {
     
     public void consultarAllRecetas(){
         recetas= recFacade.findAll();
+    }
+    
+    public String consultarRecetasCat(){
+        int catid= catgoria.getIdCategoria();
+        recetasCAT= recFacade.findRecetasByCat(catid);
+        
+        return "/public/searchByCategoriaTemplate";
+    }
+    
+    public String consultarRecetasIng(){
+        int ingid= ingrediente.getIdIngrediente();
+        recetasING= ixrFacade.findRecetasByIng(ingid);
+        
+        return "/public/searchByIngredienteTemplate";
     }
     
     public String consultarRecetaByid(){
@@ -88,12 +111,44 @@ public class GetRecetasBean implements Serializable {
         this.recetas = recetas;
     }
 
+    public List<Receta> getRecetasCAT() {
+        return recetasCAT;
+    }
+
+    public void setRecetasCAT(List<Receta> recetasCAT) {
+        this.recetasCAT = recetasCAT;
+    }
+
+    public List<Receta> getRecetasING() {
+        return recetasING;
+    }
+
+    public void setRecetasING(List<Receta> recetasING) {
+        this.recetasING = recetasING;
+    }
+
     public Receta getReceta() {
         return receta;
     }
 
     public void setReceta(Receta receta) {
         this.receta = receta;
+    }
+
+    public Categorias getCatgoria() {
+        return catgoria;
+    }
+
+    public void setCatgoria(Categorias catgoria) {
+        this.catgoria = catgoria;
+    }
+
+    public Ingredientes getIngrediente() {
+        return ingrediente;
+    }
+
+    public void setIngrediente(Ingredientes ingrediente) {
+        this.ingrediente = ingrediente;
     }
 
     public Integer getIdreceta() {

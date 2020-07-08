@@ -13,33 +13,30 @@
             <ui:define name="content">
                 <h1 style="font-size: 24px">#{lang['profile.works']}</h1>
                 <div id="top" class="top">
-                    <h:form id="colform">
-                        <p:dataTable value="#{getRecetasUsuarioBean.recetasUN}" var="rec" rowKey="#{rec.idReceta}"
-                                     selection="#{getRecetasUsuarioBean.receta}" selectionMode="single"
-                                     style=" width: 90%">
-                            <p:column headerText="#{lang['form.fill.name']}">
-                                <h:outputText value="#{rec.nombrer}"/>
-                            </p:column>
-                            <p:column headerText="#{lang['form.fill.desc']}">
-                                <h:panelGrid columns="3" cellpadding="5px" cellspacing="5px" >
-                                    <h:outputText value="#{lang['recipe.info.prept']}" />
-                                    <h:outputText value="#{rec.tprep}" style="font-weight: bold"/>
-                                    <h:outputText value="#{lang['recipe.view.min']}"/>
+                    <h:form> 
+                        <p:dataScroller value="#{getRecetasUsuarioBean.recetasUN}" var="rec" chunkSize="10">
+                            <h:panelGrid columns="2"  style="width:100%" columnClasses=" forty-percent, sixty-percent">
+                                <h:commandLink value="#{rec.nombrer}" action="#{getRecetasUsuarioBean.consultarUserRecetaByid()}"
+                                               actionListener="#{getRecetasUsuarioBean.recetaListener}">
+                                    <f:attribute name="recid" value="#{rec.idReceta}"/>
+                                </h:commandLink>
+                                <p:outputPanel>
+                                    <h:panelGrid columns="3" cellpadding="5px" cellspacing="5px" >
+                                        <h:outputText value="#{lang['recipe.info.prept']}" />
+                                        <h:outputText value="#{rec.tprep}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.min']}"/>
 
-                                    <h:outputText value="#{lang['recipe.info.cookt']}" />
-                                    <h:outputText value="#{rec.tcook}" style="font-weight: bold"/>
-                                    <h:outputText value="#{lang['recipe.view.min']}"/>
+                                        <h:outputText value="#{lang['recipe.info.cookt']}" />
+                                        <h:outputText value="#{rec.tcook}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.min']}"/>
 
-                                    <h:outputText value="#{lang['recipe.info.dif']}" />
-                                    <h:outputText value="#{rec.dificultad}" style="font-weight: bold"/>
-                                    <h:outputText value="#{lang['recipe.view.serve']}"/>
-                                </h:panelGrid>
-                            </p:column>
-                        </p:dataTable>
-                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
-                            <p:commandButton value="#{lang['temp.gen.view']}" icon="pi pi-times" action="#{getRecetasUsuarioBean.consultarUserRecetaByid()}"/>
-                            <p:button value="#{lang['add.button']}" icon="pi pi-plus" outcome="/login/collectionTemplate"/>
-                        </h:panelGrid>
+                                        <h:outputText value="#{lang['recipe.info.dif']}" />
+                                        <h:outputText value="#{rec.dificultad}" style="font-weight: bold"/>
+                                        <h:outputText value="#{lang['recipe.view.serve']}"/>
+                                    </h:panelGrid>
+                                </p:outputPanel>
+                            </h:panelGrid>
+                        </p:dataScroller>
                     </h:form>
                 </div>
             </ui:define>

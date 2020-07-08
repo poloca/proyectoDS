@@ -6,6 +6,7 @@
 package apc.proy.entity.facades;
 
 import apc.proy.entity.IngxRec;
+import apc.proy.entity.Receta;
 import apc.proy.model.dto.IRNombres;
 import java.util.List;
 import javax.ejb.Local;
@@ -34,5 +35,7 @@ public interface IngxRecFacadeLocal {
     public List<IngxRec> findIRByReceta(int recid);
     
     public List<IRNombres> findIRNamesByReceta(int recid);
+    
+    public List<Receta> findRecetasByIng(int ingid);
     
 }
